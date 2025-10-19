@@ -23,18 +23,46 @@ function goToProfile() {
    ⚙️ 2. DROPDOWN SIDEBAR MENU
    - Mendukung banyak submenu dengan arrow animasi
 ========================================================= */
+// Fungsi toggle submenu sidebar
 function toggleSidebarMenu(submenuId) {
   const submenu = document.getElementById(submenuId);
-  const isOpen = submenu.getAttribute('aria-hidden') === 'false';
-
-  // Toggle status ARIA
-  submenu.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
-
-  // Update arrow pada tombol terkait
-  const button = submenu.previousElementSibling;
-  const arrow = button.querySelector('.arrow');
-  arrow.textContent = isOpen ? '▸' : '▾';
+  const isHidden = submenu.getAttribute("aria-hidden") === "true";
+  
+  // Toggle visibilitas submenu
+  submenu.setAttribute("aria-hidden", !isHidden);
+  submenu.previousElementSibling.setAttribute("aria-expanded", isHidden);
+  
+  // Toggle panah arah
+  const arrow = submenu.previousElementSibling.querySelector(".arrow");
+  arrow.textContent = isHidden ? "▾" : "▸";
 }
+
+// Fungsi profil
+function goToProfile() {
+  Swal.fire({
+    icon: 'info',
+    title: 'Profil Pengguna',
+    text: 'Fitur profil belum diimplementasikan',
+  });
+}
+
+// Fungsi logout
+function logoutUser() {
+  Swal.fire({
+    icon: 'warning',
+    title: 'Logout',
+    text: 'Apakah Anda yakin ingin logout?',
+    showCancelButton: true,
+    confirmButtonText: 'Ya',
+    cancelButtonText: 'Tidak'
+  }).then((result) => {
+    if(result.isConfirmed){
+      // Di sini bisa redirect ke halaman login
+      window.location.href = "login.html";
+    }
+  });
+}
+
 
 
 /* =========================================================

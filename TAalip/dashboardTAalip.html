@@ -19,46 +19,74 @@
 
 <body>
   <!-- ========================= SIDEBAR ========================== -->
-  <aside class="sidebar" aria-label="Sidebar Navigasi">
-    <div class="sidebar-content">
-      
-      <!-- ===== LOGO ===== -->
-      <h2 class="logo">🐔 Sistem Peternakan</h2>
+<aside class="sidebar" aria-label="Sidebar Navigasi">
+  <div class="sidebar-content">
 
-      <!-- ===== NAVIGASI UTAMA ===== -->
-      <nav class="main-nav">
-        <a href="#" class="active" title="Dashboard">🏠 Dashboard</a>
-        <a href="#" title="Data Ayam">📊 Data Ayam</a>
-        <a href="#" title="Produksi Telur">🥚 Produksi Telur</a>
+    <!-- ===== LOGO ===== -->
+    <h2 class="logo">🐔 Sistem Peternakan</h2>
 
-        <!-- ===== SUBMENU APLIKASI ===== -->
-        <button class="has-submenu" onclick="toggleSidebarMenu('appSubmenu')" aria-expanded="false">
-          ⚙️ Aplikasi <span class="arrow">▸</span>
-        </button>
-        <div class="submenu" id="appSubmenu" aria-hidden="true">
-          <a href="#">🔹 Monitoring Kandang</a>
-          <a href="#">🔹 Laporan Produksi</a>
-          <a href="#">🔹 Stok Pakan</a>
-        </div>
+    <!-- ===== NAVIGASI UTAMA ===== -->
+    <nav class="main-nav">
+      <a href="#" class="active" title="Dashboard">🏠 Dashboard</a>
+      <a href="#" title="Data Ayam">📊 Data Ayam</a>
 
-        <!-- ===== SUBMENU DOKUMEN ===== -->
-        <button class="has-submenu" onclick="toggleSidebarMenu('docSubmenu')" aria-expanded="false">
-          📂 Dokumen <span class="arrow">▸</span>
-        </button>
-        <div class="submenu" id="docSubmenu" aria-hidden="true">
-          <a href="#">🔹 Catat Data Keuangan</a>
-          <a href="#">🔹 Laporan Kondisi Kandang</a>
-        </div>
-      </nav>
+      <!-- ===== SUBMENU Rekomendasi Prediktif ===== -->
+<button class="has-submenu" onclick="toggleSidebarMenu('kelolaSubmenu')" aria-expanded="false">
+  Rekomendasi Prediktif <span class="arrow">▸</span>
+</button>
+<div class="submenu" id="kelolaSubmenu" aria-hidden="true">
+  <a href="#"> Prediksi Hasil Telur</a>
 
-      <!-- ===== PROFIL PENGGUNA ===== -->
-      <div class="sidebar-profile">
-        <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic" onclick="goToProfile()" />
-        <p class="profile-name">Alep</p>
-        <button class="logout-btn" onclick="logoutUser()">🚪 Logout</button>
-      </div>
+</div>
+
+<!-- ===== SUBMENU Dokumen ===== -->
+<button class="has-submenu" onclick="toggleSidebarMenu('dokumenSubmenu')" aria-expanded="false">
+  📂 Dokumen <span class="arrow">▸</span>
+</button>
+<div class="submenu" id="dokumenSubmenu" aria-hidden="true">
+  <a href="#">📑 Data Keuangan</a>
+</div>
+
+<!-- ===== SUBMENU Produksi ===== -->
+<button class="has-submenu" onclick="toggleSidebarMenu('produksiSubmenu')" aria-expanded="false">
+  🥚 Produksi <span class="arrow">▸</span>
+</button>
+<div class="submenu" id="produksiSubmenu" aria-hidden="true">
+  <a href="#">📝 Input Produksi Harian</a>
+  <a href="#">📊 Laporan Produksi per Periode</a>
+</div>
+
+<!-- ===== SUBMENU Persediaan ===== -->
+<button class="has-submenu" onclick="toggleSidebarMenu('persediaanSubmenu')" aria-expanded="false">
+  📦 Persediaan <span class="arrow">▸</span>
+</button>
+<div class="submenu" id="persediaanSubmenu" aria-hidden="true">
+  <a href="#">🥬 Stok Pakan, Obat, Vitamin</a>
+  <a href="#">⏰ Restock Reminder</a>
+  <a href="#">📜 Histori Penggunaan Pakan</a>
+</div>
+
+<!-- ===== SUBMENU Keuangan ===== -->
+<button class="has-submenu" onclick="toggleSidebarMenu('keuanganSubmenu')" aria-expanded="false">
+  💵 Keuangan <span class="arrow">▸</span>
+</button>
+<div class="submenu" id="keuanganSubmenu" aria-hidden="true">
+  <a href="#">💰 Pemasukan & Pengeluaran</a>
+  <a href="#">📊 Laporan Laba/Rugi</a>
+  <a href="#">📤 Ekspor Laporan</a>
+</div>
+
+
+    <!-- ===== PROFIL PENGGUNA ===== -->
+    <div class="sidebar-profile">
+      <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic" onclick="goToProfile()" />
+      <p class="profile-name">Alep</p>
+      <button class="logout-btn" onclick="logoutUser()">🚪 Logout</button>
     </div>
-  </aside>
+
+  </div>
+</aside>
+
 
   <!-- ========================= MAIN CONTENT ========================== -->
   <main class="main-content">
@@ -85,7 +113,7 @@
 
       <!-- ===== PENGUMUMAN ===== -->
       <div class="reminder-card animate__animated animate__fadeInUp">
-        <h3>📢 Pengumuman Kandang</h3>
+        <h3>📢 Pengumuman</h3>
         <ul>
           <li>📌 Pembersihan kandang dilakukan setiap <strong>Senin & Kamis</strong>.</li>
           <li>📌 Vaksinasi ayam dilakukan pada <strong>20 Oktober 2025</strong>.</li>
