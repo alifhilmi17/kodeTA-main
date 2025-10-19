@@ -1,0 +1,345 @@
+/* =========================================================
+   🧩 GLOBAL RESET & FONT
+========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  background-color: #f9fafb;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   🧭 SIDEBAR (NAVIGASI SAMPING)
+========================================================= */
+.sidebar {
+  width: 250px;
+  height: 100vh; /* Sidebar full layar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* profil di bawah */
+  background: linear-gradient(180deg, #ffcc70 0%, #ff7e5f 100%);
+  color: #fff;
+  padding: 1.5rem;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+  overflow-y: auto; /* scroll jika isi banyak */
+}
+
+/* ===== Logo ===== */
+.sidebar .logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.sidebar .logo span {
+  display: block;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+/* ===== Navigasi Utama ===== */
+.main-nav a,
+.main-nav button {
+  display: block;
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav button:hover,
+.main-nav a.active {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.03);
+}
+
+/* ===== Tombol Submenu ===== */
+.has-submenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  font-size: 16px;
+  padding: 10px 15px;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.has-submenu:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.03);
+}
+
+/* ===== Submenu (otomatis menyesuaikan tinggi) ===== */
+.submenu {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-5px);
+  margin-left: 10px;
+  transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+}
+
+.submenu.show {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.submenu a {
+  display: block;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 0.4rem;
+  transition: all 0.3s ease;
+}
+
+.submenu a:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== Panah (Arrow) ===== */
+#arrow {
+  transition: transform 0.3s ease;
+}
+
+#arrow.rotate {
+  transform: rotate(90deg);
+}
+
+/* =========================================================
+   👤 PROFIL PENGGUNA (BAGIAN BAWAH SIDEBAR)
+========================================================= */
+.sidebar-profile {
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.profile-pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.profile-pic:hover {
+  transform: scale(1.1);
+}
+
+.profile-name {
+  font-weight: 600;
+}
+
+.logout-btn {
+  margin-top: 0.5rem;
+  background: #e63946;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background: #c92a34;
+}
+
+/* =========================================================
+   🧾 MAIN CONTENT (ISI UTAMA DASHBOARD)
+========================================================= */
+.main-content {
+  margin-left: 260px;
+  width: calc(100% - 260px);
+  padding: 2rem;
+}
+
+/* ===== Kartu Sambutan ===== */
+.welcome-card {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  padding: 1.5rem 2rem;
+  border-radius: 15px;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-card h2 {
+  color: #3a3a3a;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== Grid Layout Konten ===== */
+.office-admin {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 1.5rem;
+}
+
+/* =========================================================
+   📦 CARD STYLE (KOTAK KONTEN)
+========================================================= */
+.manage-card,
+.reminder-card,
+.office-card,
+.documents {
+  background: #fff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.manage-card ul,
+.reminder-card ul,
+.documents ul {
+  list-style: none;
+}
+
+.manage-card ul li,
+.reminder-card ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+/* =========================================================
+   📅 TABEL JADWAL KEGIATAN
+========================================================= */
+.meeting-schedule {
+  overflow-x: auto;
+}
+
+.meeting-schedule table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.meeting-schedule th,
+.meeting-schedule td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+
+.meeting-schedule thead {
+  background: #fcb69f;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.meeting-schedule tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.meeting-schedule tbody tr:hover {
+  background-color: #fff2e6;
+  transition: 0.3s;
+}
+
+/* ===== Tombol Hapus ===== */
+.delete-btn {
+  background: #ff6b6b;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #e63946;
+}
+
+/* =========================================================
+   📝 FORM TAMBAH KEGIATAN
+========================================================= */
+.add-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.add-form input {
+  flex: 1 1 180px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.add-form input:focus {
+  border-color: #fcb69f;
+  box-shadow: 0 0 5px rgba(252, 182, 159, 0.5);
+}
+
+.add-form button {
+  padding: 0.6rem 1rem;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-form button:hover {
+  background-color: #43a047;
+}
+
+/* =========================================================
+   📱 RESPONSIVE DESIGN
+========================================================= */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .main-content {
+    margin-left: 210px;
+    padding: 1rem;
+  }
+
+  .office-admin {
+    grid-template-columns: 1fr;
+  }
+
+  .add-form {
+    flex-direction: column;
+  }
+}
