@@ -32,24 +32,31 @@
         <a href="#" title="Produksi Telur">🥚 Produksi Telur</a>
 
         <!-- ===== SUBMENU APLIKASI ===== -->
-        <button class="has-submenu" onclick="toggleSidebarMenu()" aria-expanded="false">
-          ⚙️ Aplikasi
-          <span id="arrow">▸</span>
+        <button class="has-submenu" onclick="toggleSidebarMenu('appSubmenu')" aria-expanded="false">
+          ⚙️ Aplikasi <span class="arrow">▸</span>
         </button>
-
         <div class="submenu" id="appSubmenu" aria-hidden="true">
           <a href="#">🔹 Monitoring Kandang</a>
           <a href="#">🔹 Laporan Produksi</a>
           <a href="#">🔹 Stok Pakan</a>
         </div>
-      </nav>
-    </div>
 
-    <!-- ===== PROFIL PENGGUNA ===== -->
-    <div class="sidebar-profile">
-      <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic" onclick="goToProfile()" />
-      <p class="profile-name">Alep</p>
-      <button class="logout-btn" onclick="logoutUser()">🚪 Logout</button>
+        <!-- ===== SUBMENU DOKUMEN ===== -->
+        <button class="has-submenu" onclick="toggleSidebarMenu('docSubmenu')" aria-expanded="false">
+          📂 Dokumen <span class="arrow">▸</span>
+        </button>
+        <div class="submenu" id="docSubmenu" aria-hidden="true">
+          <a href="#">🔹 Catat Data Keuangan</a>
+          <a href="#">🔹 Laporan Kondisi Kandang</a>
+        </div>
+      </nav>
+
+      <!-- ===== PROFIL PENGGUNA ===== -->
+      <div class="sidebar-profile">
+        <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic" onclick="goToProfile()" />
+        <p class="profile-name">Alep</p>
+        <button class="logout-btn" onclick="logoutUser()">🚪 Logout</button>
+      </div>
     </div>
   </aside>
 
@@ -112,15 +119,6 @@
         </form>
       </div>
 
-      <!-- ===== DOKUMEN ===== -->
-      <div class="office-card documents animate__animated animate__fadeInUp">
-        <h3>📂 Dokumen Peternakan</h3>
-        <ul>
-          <li><a href="#">📑 Catatan Produksi Telur</a></li>
-          <li><a href="#">📑 Data Kesehatan Ayam</a></li>
-          <li><a href="#">📑 Laporan Keuangan Bulanan</a></li>
-        </ul>
-      </div>
     </section>
   </main>
 
@@ -128,4 +126,3 @@
   <script src="js/dashboardTAalip.js"></script>
 </body>
 </html>
-

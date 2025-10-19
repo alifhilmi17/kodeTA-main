@@ -3,12 +3,12 @@
    File: dashboardTAalip.js
    Deskripsi: Mengatur interaksi sidebar, profil, logout,
    dan manajemen tabel kegiatan peternakan.
-   ========================================================= */
+========================================================= */
 
 
 /* =========================================================
    👤 1. MENU PROFIL
-   ========================================================= */
+========================================================= */
 function goToProfile() {
   Swal.fire({
     icon: 'info',
@@ -21,27 +21,25 @@ function goToProfile() {
 
 /* =========================================================
    ⚙️ 2. DROPDOWN SIDEBAR MENU
-   ========================================================= */
-function toggleSidebarMenu() {
-  const submenu = document.getElementById("appSubmenu");
-  const arrow = document.getElementById("arrow");
-  const button = document.querySelector(".has-submenu");
+   - Mendukung banyak submenu dengan arrow animasi
+========================================================= */
+function toggleSidebarMenu(submenuId) {
+  const submenu = document.getElementById(submenuId);
+  const isOpen = submenu.getAttribute('aria-hidden') === 'false';
 
-  // Toggle class untuk menampilkan / menyembunyikan submenu
-  const isOpen = submenu.classList.toggle("show");
+  // Toggle status ARIA
+  submenu.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
 
-  // Aksesibilitas ARIA
-  submenu.setAttribute("aria-hidden", !isOpen);
-  button.setAttribute("aria-expanded", isOpen);
-
-  // Animasi rotasi panah
-  arrow.classList.toggle("rotate", isOpen);
+  // Update arrow pada tombol terkait
+  const button = submenu.previousElementSibling;
+  const arrow = button.querySelector('.arrow');
+  arrow.textContent = isOpen ? '▸' : '▾';
 }
 
 
 /* =========================================================
    🚪 3. LOGOUT BUTTON
-   ========================================================= */
+========================================================= */
 function logoutUser() {
   Swal.fire({
     title: "Yakin ingin logout?",
@@ -59,28 +57,18 @@ function logoutUser() {
 
 /* =========================================================
    📅 4. TABEL JADWAL & FORM TAMBAH KEGIATAN
-   ========================================================= */
+========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const tableBody = document.querySelector("#scheduleTable tbody");
   const form = document.getElementById("addScheduleForm");
 
   // Data awal (dummy) atau dari localStorage
   let scheduleData = JSON.parse(localStorage.getItem("scheduleData")) || [
-    {
-      tanggal: "Senin, 14 Okt 2025",
-      waktu: "08:00",
-      agenda: "Cek stok pakan",
-      ruangan: "Gudang Pakan"
-    },
-    {
-      tanggal: "Selasa, 15 Okt 2025",
-      waktu: "09:00",
-      agenda: "Panen Telur",
-      ruangan: "Kandang A"
-    }
+    { tanggal: "Senin, 14 Okt 2025", waktu: "08:00", agenda: "Cek stok pakan", ruangan: "Gudang Pakan" },
+    { tanggal: "Selasa, 15 Okt 2025", waktu: "09:00", agenda: "Panen Telur", ruangan: "Kandang A" }
   ];
 
-  // 🔹 Fungsi menampilkan data ke tabel
+  /* 🔹 Fungsi menampilkan data ke tabel */
   function renderTable() {
     tableBody.innerHTML = "";
     scheduleData.forEach((item, index) => {
@@ -101,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Tampilkan data awal saat halaman dimuat
   renderTable();
 
-  // 🔹 Event: Tambah kegiatan
+  /* 🔹 Event: Tambah kegiatan */
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -124,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 🔹 Event: Hapus kegiatan
+  /* 🔹 Event: Hapus kegiatan */
   tableBody.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete-btn")) {
       const idx = e.target.dataset.index;
