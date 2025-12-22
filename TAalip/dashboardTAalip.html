@@ -4,7 +4,7 @@
   <!-- ========================= META & TITLE ========================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sistem Administrasi Peternakan</title>
+  <title>Lintau Buo Administration System</title>
 
   <!-- ========================= FONTS & ANIMATIONS ========================== -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
@@ -28,7 +28,13 @@
     <!-- ===== NAVIGASI UTAMA ===== -->
     <nav class="main-nav">
       <a href="#" class="active" title="Dashboard">🏠 Dashboard</a>
-      <a href="#" title="Data Ayam">📊 Data Ayam</a>
+      <button class="has-submenu" onclick="toggleSidebarMenu('ternakSubmenu')" aria-expanded="false">
+  📊 Data Ayam <span class="arrow">▸</span>
+</button>
+<div class="submenu" id="ternakSubmenu" aria-hidden="true">
+    <a href="#">🐓 Data Ayam</a>
+    <a href="#">🏠 Data Kandang</a>
+</div>
 
       <!-- ===== SUBMENU Rekomendasi Prediktif ===== -->
 <button class="has-submenu" onclick="toggleSidebarMenu('kelolaSubmenu')" aria-expanded="false">
@@ -73,9 +79,9 @@
 <div class="submenu" id="keuanganSubmenu" aria-hidden="true">
   <a href="#">💰 Pemasukan & Pengeluaran</a>
   <a href="#">📊 Laporan Laba/Rugi</a>
-  <a href="#">📤 Ekspor Laporan</a>
 </div>
 
+  <a href="#">📤 Ekspor Laporan</a>
 
     <!-- ===== PROFIL PENGGUNA ===== -->
     <div class="sidebar-profile">
