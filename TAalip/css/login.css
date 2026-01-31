@@ -15,6 +15,8 @@ body {
   justify-content: center;
   background: #111;
   overflow: hidden;
+  perspective: 1000px;
+  /* Enable 3D perspective */
 }
 
 /* =========================
@@ -28,44 +30,142 @@ body {
   background-size: 400% 400%;
   animation: gradientBG 12s ease infinite;
   z-index: -1;
+  transform: scale(1.1);
+  /* Prevent edges showing on tilt */
 }
 
 @keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* =========================
+   BACKGROUND SHAPES
+========================= */
+.shapes-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.shape {
+  position: absolute;
+  filter: blur(50px);
+  z-index: -1;
+  opacity: 0.6;
+  animation: floatShape 10s infinite alternate ease-in-out;
+}
+
+.shape-1 {
+  top: -10%;
+  left: -10%;
+  width: 300px;
+  height: 300px;
+  background: #ff00cc;
+  border-radius: 50%;
+  animation-duration: 8s;
+}
+
+.shape-2 {
+  bottom: 10%;
+  right: -5%;
+  width: 250px;
+  height: 250px;
+  background: #3333ff;
+  border-radius: 50%;
+  animation-duration: 12s;
+}
+
+.shape-3 {
+  top: 40%;
+  left: 30%;
+  width: 150px;
+  height: 150px;
+  background: #00ffff;
+  border-radius: 50%;
+  animation-duration: 10s;
+}
+
+@keyframes floatShape {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(30px, 50px) scale(1.1);
+  }
+}
+
+/* =========================
+   LOGIN CARD WRAPPER
+========================= */
+.login-wrapper {
+  position: relative;
+  width: 360px;
+  /* Slightly wider */
+  z-index: 10;
 }
 
 /* =========================
    LOGIN CARD
 ========================= */
 .login-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(15px);
-  padding: 40px 35px;
-  border-radius: 20px;
-  width: 320px;
+  background: rgba(255, 255, 255, 0.05);
+  /* More transparent */
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  padding: 40px;
+  border-radius: 24px;
+  width: 100%;
   text-align: center;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  animation: fadeIn 1.2s ease;
+  animation: fadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  /* For spotlight */
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px);}
-  to { opacity: 1; transform: translateY(0);}
+/* Spotlight Effect Layer */
+.card-spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 255, 255, 0.1),
+      transparent 40%);
+  z-index: 1;
 }
 
 .login-card h2 {
-  font-weight: 600;
-  font-size: 28px;
+  font-weight: 700;
+  font-size: 32px;
   margin-bottom: 5px;
+  letter-spacing: 1px;
 }
 
 .login-card .subtitle {
-  font-size: 14px;
-  color: #ddd;
-  margin-bottom: 25px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 30px;
 }
 
 /* =========================
@@ -73,31 +173,57 @@ body {
 ========================= */
 .input-group {
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 2;
 }
 
 .input-group label {
-  font-size: 14px;
-  color: #eee;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
   display: block;
-  margin-bottom: 6px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.password-wrapper {
+  position: relative;
 }
 
 .input-group input {
   width: 100%;
-  padding: 12px 15px;
-  border-radius: 10px;
-  border: none;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   outline: none;
-  background: rgba(255,255,255,0.15);
+  background: rgba(0, 0, 0, 0.2);
   color: #fff;
-  font-size: 14px;
-  transition: 0.3s ease;
+  font-size: 15px;
+  transition: all 0.3s ease;
 }
 
 .input-group input:focus {
-  background: rgba(255,255,255,0.25);
-  box-shadow: 0 0 8px rgba(255,255,255,0.4);
+  background: rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password:hover {
+  opacity: 1;
 }
 
 /* =========================
@@ -105,21 +231,66 @@ body {
 ========================= */
 .login-btn {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  /* Softer gradient */
+  background-size: 200% auto;
   color: #fff;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-btn:hover {
-  background: linear-gradient(135deg, #2575fc, #6a11cb);
-  transform: scale(1.03);
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(161, 140, 209, 0.4);
+}
+
+.login-btn:active {
+  transform: scale(0.98);
+}
+
+/* Loader Styles */
+.loader {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 3px solid #fff;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  display: none;
+  /* Hidden by default */
+  margin-left: 10px;
+}
+
+.login-btn.loading .btn-text {
+  display: none;
+}
+
+.login-btn.loading .loader {
+  display: block;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* =========================
@@ -136,8 +307,108 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: 0.3s;
+  position: relative;
 }
 
-.extra-links a:hover {
-  text-decoration: underline;
+.extra-links a::after {
+  content: '';
+  width: 0;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  transition: 0.3s;
+}
+
+.extra-links a:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   CHICKEN ANIMATION
+========================= */
+#chicken-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  display: none;
+  /* Hidden by default */
+}
+
+#chicken-overlay.active {
+  display: block;
+}
+
+.chicken {
+  width: 128px;
+  /* Adjust based on frame size */
+  height: 128px;
+  background-image: url('../images/chicken_running.png');
+  background-repeat: no-repeat;
+  background-size: 512px 100%;
+  /* 4 frames * 128px */
+  position: absolute;
+  bottom: 20px;
+  /* Run slightly above bottom */
+  left: -150px;
+  /* Start off-screen */
+}
+
+/* Sprite Animation */
+@keyframes runSprite {
+  from {
+    background-position: 0 center;
+  }
+
+  to {
+    background-position: -512px center;
+  }
+}
+
+/* Movement Animation */
+@keyframes moveRight {
+  from {
+    left: -150px;
+  }
+
+  to {
+    left: 110%;
+  }
+}
+
+#chicken-overlay.active .chicken {
+  animation:
+    runSprite 0.4s steps(4) infinite,
+    moveRight 3s linear forwards;
+}
+
+/* =========================
+   RIPPLE EFFECT
+========================= */
+.ripple {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border-radius: 50%;
+  animation: rippleAnim 0.6s linear;
+}
+
+@keyframes rippleAnim {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.5;
+  }
+
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
 }

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <!-- ========================= META & TITLE ========================== -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lintau Buo Administration System</title>
 
   <!-- ========================= FONTS & ANIMATIONS ========================== -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <!-- ========================= CUSTOM CSS ========================== -->
-  <link rel="stylesheet" href="css/dashboardTAalip.css"/>
+  <link rel="stylesheet" href="css/dashboardTAalip.css" />
+  
 
   <!-- ========================= SWEETALERT2 ========================== -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -19,79 +21,79 @@
 
 <body>
   <!-- ========================= SIDEBAR ========================== -->
-<aside class="sidebar" aria-label="Sidebar Navigasi">
-  <div class="sidebar-content">
+  <aside class="sidebar" aria-label="Sidebar Navigasi">
+    <div class="sidebar-content">
 
-    <!-- ===== LOGO ===== -->
-    <h2 class="logo">🐔 LIBAS</h2>
+      <!-- ===== LOGO ===== -->
+      <h2 class="logo">🐔 LIBAS</h2>
 
-    <!-- ===== NAVIGASI UTAMA ===== -->
-    <nav class="main-nav">
-      <a href="#" class="active" title="Dashboard">🏠 Dashboard</a>
-      <button class="has-submenu" onclick="toggleSidebarMenu('ternakSubmenu')" aria-expanded="false">
-  📊 Data Ayam <span class="arrow">▸</span>
-</button>
-<div class="submenu" id="ternakSubmenu" aria-hidden="true">
-    <a href="#">🐓 Data Ayam</a>
-    <a href="#">🏠 Data Kandang</a>
-</div>
+      <!-- ===== NAVIGASI UTAMA ===== -->
+      <nav class="main-nav">
+        <a href="#" class="active" title="Dashboard">🏠 Dashboard</a>
+        <button class="has-submenu" onclick="toggleSidebarMenu('ternakSubmenu')" aria-expanded="false">
+          📊 Data Ayam <span class="arrow">▸</span>
+        </button>
+        <div class="submenu" id="ternakSubmenu" aria-hidden="true">
+          <a href="#">🐓 Data Ayam</a>
+          <a href="#">🏠 Data Kandang</a>
+        </div>
 
-      <!-- ===== SUBMENU Rekomendasi Prediktif ===== -->
-<button class="has-submenu" onclick="toggleSidebarMenu('kelolaSubmenu')" aria-expanded="false">
-  Rekomendasi Prediktif <span class="arrow">▸</span>
-</button>
-<div class="submenu" id="kelolaSubmenu" aria-hidden="true">
-  <a href="#"> Prediksi Hasil Telur</a>
+        <!-- ===== SUBMENU Rekomendasi Prediktif ===== -->
+        <button class="has-submenu" onclick="toggleSidebarMenu('kelolaSubmenu')" aria-expanded="false">
+          Rekomendasi Prediktif <span class="arrow">▸</span>
+        </button>
+        <div class="submenu" id="kelolaSubmenu" aria-hidden="true">
+          <a href="prediksihasiltelur.html"> Prediksi Hasil Telur</a>
 
-</div>
+        </div>
 
-<!-- ===== SUBMENU Dokumen ===== -->
-<button class="has-submenu" onclick="toggleSidebarMenu('dokumenSubmenu')" aria-expanded="false">
-  📂 Dokumen <span class="arrow">▸</span>
-</button>
-<div class="submenu" id="dokumenSubmenu" aria-hidden="true">
-  <a href="#">📑 Data Keuangan</a>
-</div>
+        <!-- ===== SUBMENU Dokumen ===== -->
+        <button class="has-submenu" onclick="toggleSidebarMenu('dokumenSubmenu')" aria-expanded="false">
+          📂 Dokumen <span class="arrow">▸</span>
+        </button>
+        <div class="submenu" id="dokumenSubmenu" aria-hidden="true">
+          <a href="#">📑 Data Keuangan</a>
+        </div>
 
-<!-- ===== SUBMENU Produksi ===== -->
-<button class="has-submenu" onclick="toggleSidebarMenu('produksiSubmenu')" aria-expanded="false">
-  🥚 Produksi <span class="arrow">▸</span>
-</button>
-<div class="submenu" id="produksiSubmenu" aria-hidden="true">
-  <a href="#">📝 Input Produksi Harian</a>
-  <a href="#">📊 Laporan Produksi per Periode</a>
-</div>
+        <!-- ===== SUBMENU Produksi ===== -->
+        <button class="has-submenu" onclick="toggleSidebarMenu('produksiSubmenu')" aria-expanded="false">
+          🥚 Produksi <span class="arrow">▸</span>
+        </button>
+        <div class="submenu" id="produksiSubmenu" aria-hidden="true">
+          <a href="#">📝 Input Produksi Harian</a>
+          <a href="#">📊 Laporan Produksi per Periode</a>
+        </div>
 
-<!-- ===== SUBMENU Persediaan ===== -->
-<button class="has-submenu" onclick="toggleSidebarMenu('persediaanSubmenu')" aria-expanded="false">
-  📦 Persediaan <span class="arrow">▸</span>
-</button>
-<div class="submenu" id="persediaanSubmenu" aria-hidden="true">
-  <a href="#">🥬 Stok Pakan, Obat, Vitamin</a>
-  <a href="#">⏰ Restock Reminder</a>
-  <a href="#">📜 Histori Penggunaan Pakan</a>
-</div>
+        <!-- ===== SUBMENU Persediaan ===== -->
+        <button class="has-submenu" onclick="toggleSidebarMenu('persediaanSubmenu')" aria-expanded="false">
+          📦 Persediaan <span class="arrow">▸</span>
+        </button>
+        <div class="submenu" id="persediaanSubmenu" aria-hidden="true">
+          <a href="#">🥬 Stok Pakan, Obat, Vitamin</a>
+          <a href="#">⏰ Restock Reminder</a>
+          <a href="#">📜 Histori Penggunaan Pakan</a>
+        </div>
 
-<!-- ===== SUBMENU Keuangan ===== -->
-<button class="has-submenu" onclick="toggleSidebarMenu('keuanganSubmenu')" aria-expanded="false">
-  💵 Keuangan <span class="arrow">▸</span>
-</button>
-<div class="submenu" id="keuanganSubmenu" aria-hidden="true">
-  <a href="#">💰 Pemasukan & Pengeluaran</a>
-  <a href="#">📊 Laporan Laba/Rugi</a>
-</div>
+        <!-- ===== SUBMENU Keuangan ===== -->
+        <button class="has-submenu" onclick="toggleSidebarMenu('keuanganSubmenu')" aria-expanded="false">
+          💵 Keuangan <span class="arrow">▸</span>
+        </button>
+        <div class="submenu" id="keuanganSubmenu" aria-hidden="true">
+          <a href="#">💰 Pemasukan & Pengeluaran</a>
+          <a href="#">📊 Laporan Laba/Rugi</a>
+        </div>
 
-  <a href="#">📤 Ekspor Laporan</a>
+        <a href="#">📤 Ekspor Laporan</a>
 
-    <!-- ===== PROFIL PENGGUNA ===== -->
-    <div class="sidebar-profile">
-      <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic" onclick="goToProfile()" />
-      <p class="profile-name">Alep</p>
-      <button class="logout-btn" onclick="logoutUser()">🚪 Logout</button>
+        <!-- ===== PROFIL PENGGUNA ===== -->
+        <div class="sidebar-profile">
+          <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic" onclick="goToProfile()" />
+          <p class="profile-name">Alep</p>
+          <button class="logout-btn" onclick="logoutUser()">🚪 Logout</button>
+        </div>
+
     </div>
-
-  </div>
-</aside>
+  </aside>
 
 
   <!-- ========================= MAIN CONTENT ========================== -->
@@ -159,4 +161,5 @@
   <!-- ========================= JAVASCRIPT ========================== -->
   <script src="js/dashboardTAalip.js"></script>
 </body>
+
 </html>
