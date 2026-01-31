@@ -345,45 +345,57 @@ body {
 }
 
 .chicken {
-  width: 128px;
-  /* Adjust based on frame size */
-  height: 128px;
-  background-image: url('../images/chicken_running.png');
+  width: 100px;
+  height: 100px;
+  background-image: url('../images/chicken_running-removebg-preview.png');
   background-repeat: no-repeat;
-  background-size: 512px 100%;
-  /* 4 frames * 128px */
+  /* 2x2 grid means the image is 200% width and 200% height of the container */
+  background-size: 200% 200%;
   position: absolute;
   bottom: 20px;
-  /* Run slightly above bottom */
   left: -150px;
-  /* Start off-screen */
+  image-rendering: pixelated;
+  /* Keeps pixel art crisp */
 }
 
-/* Sprite Animation */
+/* 2x2 Sprite Animation */
 @keyframes runSprite {
-  from {
-    background-position: 0 center;
+  0% {
+    background-position: 0% 0%;
   }
 
-  to {
-    background-position: -512px center;
+  25% {
+    background-position: 100% 0%;
+  }
+
+  50% {
+    background-position: 0% 100%;
+  }
+
+  75% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
   }
 }
 
 /* Movement Animation */
 @keyframes moveRight {
-  from {
+  0% {
     left: -150px;
   }
 
-  to {
+  100% {
     left: 110%;
+    /* Move completely off screen */
   }
 }
 
 #chicken-overlay.active .chicken {
   animation:
-    runSprite 0.4s steps(4) infinite,
+    runSprite 0.4s steps(1) infinite,
     moveRight 3s linear forwards;
 }
 

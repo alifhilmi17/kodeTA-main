@@ -94,16 +94,18 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add loading state
             loginBtn.classList.add('loading');
 
-            // Simulate network request (1.5 seconds)
-            setTimeout(() => {
-                // Determine whether to use JS redirection or form submission
-                // For this example, we'll manually submit or redirect
-                // loginForm.submit(); // If you want actual submission
+            // Trigger Chicken Animation
+            const chickenOverlay = document.getElementById('chicken-overlay');
+            if (chickenOverlay) {
+                chickenOverlay.classList.add('active');
+            }
 
-                // Or manual redirect as per the form action
+            // Wait for animation to finish (3 seconds based on CSS) + buffer
+            setTimeout(() => {
+                // Manual redirect as per the form action
                 const action = loginForm.getAttribute('action');
                 window.location.href = action;
-            }, 1500);
+            }, 3000); // 3s matches the css animation duration
         });
     }
 });
