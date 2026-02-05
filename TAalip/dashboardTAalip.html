@@ -13,7 +13,7 @@
 
   <!-- ========================= CUSTOM CSS ========================== -->
   <link rel="stylesheet" href="css/dashboardTAalip.css" />
-  
+
 
   <!-- ========================= SWEETALERT2 ========================== -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -95,7 +95,6 @@
     </div>
   </aside>
 
-
   <!-- ========================= MAIN CONTENT ========================== -->
   <main class="main-content">
 
@@ -111,22 +110,25 @@
       <!-- ===== AKTIVITAS HARIAN ===== -->
       <div class="manage-card animate__animated animate__fadeInUp">
         <h3>🧺 Aktivitas Harian</h3>
-        <ul>
-          <li id="manage1">Cek stok pakan</li>
-          <li id="manage2">Catat jumlah telur harian</li>
-          <li id="manage3">Periksa kesehatan ayam</li>
-          <li id="manage4">Input laporan produksi</li>
+        <ul id="dailyActivityList">
+          <!-- Diisi via JavaScript -->
         </ul>
+        <form id="addActivityForm" class="add-form" style="margin-top: 1rem;">
+          <input type="text" id="activityInput" placeholder="Tambah aktivitas..." required>
+          <button type="submit">Tambah</button>
+        </form>
       </div>
 
       <!-- ===== PENGUMUMAN ===== -->
       <div class="reminder-card animate__animated animate__fadeInUp">
         <h3>📢 Pengumuman</h3>
-        <ul>
-          <li>📌 Pembersihan kandang dilakukan setiap <strong>Senin & Kamis</strong>.</li>
-          <li>📌 Vaksinasi ayam dilakukan pada <strong>20 Oktober 2025</strong>.</li>
-          <li>📌 Perawatan atap kandang dijadwalkan <strong>25 Oktober 2025</strong>.</li>
+        <ul id="announcementList">
+          <!-- Diisi via JavaScript -->
         </ul>
+        <form id="addAnnouncementForm" class="add-form" style="margin-top: 1rem;">
+          <input type="text" id="announcementInput" placeholder="Tambah pengumuman..." required>
+          <button type="submit">Tambah</button>
+        </form>
       </div>
 
       <!-- ===== JADWAL KEGIATAN ===== -->
