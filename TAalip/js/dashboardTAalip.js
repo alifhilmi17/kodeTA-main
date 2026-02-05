@@ -5,24 +5,10 @@
    dan manajemen tabel kegiatan peternakan.
 ========================================================= */
 
+// =========================================
+// 1. SIDEBAR & NAVIGASI
+// =========================================
 
-/* =========================================================
-   👤 1. MENU PROFIL
-========================================================= */
-function goToProfile() {
-  Swal.fire({
-    icon: 'info',
-    title: 'Profil Peternak',
-    text: 'Menu profil sedang dalam pengembangan 🐔',
-    confirmButtonColor: '#fb8500'
-  });
-}
-
-
-/* =========================================================
-   ⚙️ 2. DROPDOWN SIDEBAR MENU
-   - Mendukung banyak submenu dengan arrow animasi
-========================================================= */
 // Fungsi toggle submenu sidebar
 function toggleSidebarMenu(submenuId) {
   const submenu = document.getElementById(submenuId);
@@ -42,54 +28,37 @@ function goToProfile() {
   Swal.fire({
     icon: 'info',
     title: 'Profil Pengguna',
-    text: 'Fitur profil belum diimplementasikan',
+    text: 'Fitur profil belum diimplementasikan 🐔',
+    confirmButtonColor: '#fb8500'
   });
 }
 
 // Fungsi logout
 function logoutUser() {
   Swal.fire({
-    icon: 'warning',
-    title: 'Logout',
-    text: 'Apakah Anda yakin ingin logout?',
+    title: "Yakin ingin logout?",
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonText: 'Ya',
-    cancelButtonText: 'Tidak'
+    confirmButtonText: "Ya, logout",
+    cancelButtonText: "Batal",
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6"
   }).then((result) => {
     if (result.isConfirmed) {
-      // Di sini bisa redirect ke halaman login
+      // Redirect ke halaman login
       window.location.href = "login.html";
     }
   });
 }
 
 
-
 /* =========================================================
-   🚪 3. LOGOUT BUTTON
-========================================================= */
-function logoutUser() {
-  Swal.fire({
-    title: "Yakin ingin logout?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Ya, logout",
-    cancelButtonText: "Batal"
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire("Berhasil logout!", "", "success");
-    }
-  });
-}
-
-
-/* =========================================================
-   📅 4. TABEL JADWAL & FORM TAMBAH KEGIATAN
+   � MAIN DASHBOARD LOGIC (DOM LOADED)
 ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
 
   // =========================================
-  // 1. MANAJEMEN JADWAL (EXISTING)
+  // A. MANAJEMEN JADWAL KEGIATAN
   // =========================================
   const scheduleTableBody = document.querySelector("#scheduleTable tbody");
   const scheduleForm = document.getElementById("addScheduleForm");
@@ -124,18 +93,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const agenda = document.getElementById("agenda").value;
     const ruangan = document.getElementById("ruangan").value;
 
-    scheduleData.push({ tanggal, waktu, agenda, ruangan });
-    localStorage.setItem("scheduleData", JSON.stringify(scheduleData));
-    renderSchedule();
-    scheduleForm.reset();
-    Swal.fire("Berhasil!", "Jadwal ditambahkan", "success");
+    Swal.fire({
+      title: "Tambah Kegiatan?",
+      text: `Apakah Anda yakin ingin menambahkan kegiatan "${agenda}"?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Ya, Tambah",
+      cancelButtonText: "Batal",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        scheduleData.push({ tanggal, waktu, agenda, ruangan });
+        localStorage.setItem("scheduleData", JSON.stringify(scheduleData));
+        renderSchedule();
+        scheduleForm.reset();
+        Swal.fire("Berhasil", "Jadwal berhasil ditambahkan!", "success");
+      }
+    });
   });
 
   scheduleTableBody.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete-schedule")) {
       const idx = e.target.dataset.index;
       Swal.fire({
-        title: "Hapus jadwal?", icon: "warning", showCancelButton: true, confirmButtonText: "Ya", cancelButtonText: "Batal"
+        title: "Hapus jadwal?",
+        text: "Anda tidak dapat mengembalikan data ini!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Ya, hapus!",
+        cancelButtonText: "Batal"
       }).then((result) => {
         if (result.isConfirmed) {
           scheduleData.splice(idx, 1);
@@ -149,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================
-  // 2. MANAJEMEN AKTIVITAS HARIAN
+  // B. MANAJEMEN AKTIVITAS HARIAN
   // =========================================
   const activityList = document.getElementById("dailyActivityList");
   const activityForm = document.getElementById("addActivityForm");
@@ -209,34 +198,81 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const input = document.getElementById("activityInput");
     if (input.value.trim() !== "") {
-      activityData.push({ text: input.value.trim(), completed: false });
-      localStorage.setItem("activityData", JSON.stringify(activityData));
-      renderActivities();
-      input.value = "";
-      Swal.fire({ title: "Berhasil!", text: "Aktivitas ditambahkan", icon: "success", timer: 1500, showConfirmButton: false });
+      const newActivity = input.value.trim();
+
+      Swal.fire({
+        title: "Tambah Aktivitas?",
+        text: `Apakah Anda yakin ingin menambahkan "${newActivity}"?`,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Ya, Tambah",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          activityData.push({ text: newActivity, completed: false });
+          localStorage.setItem("activityData", JSON.stringify(activityData));
+          renderActivities();
+          input.value = "";
+          Swal.fire("Berhasil", "Aktivitas berhasil ditambahkan!", "success");
+        }
+      });
     }
   });
 
   activityList.addEventListener("click", (e) => {
-    // Delete
-    if (e.target.classList.contains("delete-activity")) {
-      const idx = e.target.dataset.index;
-      activityData.splice(idx, 1);
-      localStorage.setItem("activityData", JSON.stringify(activityData));
-      renderActivities();
+    // Helper to get index from button or inside button
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const idx = btn.dataset.index;
+
+    // Delete Activity
+    if (btn.classList.contains("delete-activity")) {
+      Swal.fire({
+        title: "Hapus Aktivitas?",
+        text: "Item ini akan dihapus permanen.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, Hapus",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          activityData.splice(idx, 1);
+          localStorage.setItem("activityData", JSON.stringify(activityData));
+          renderActivities();
+          Swal.fire("Terhapus!", "Aktivitas telah dihapus.", "success");
+        }
+      });
     }
-    // Check (Complete)
-    if (e.target.classList.contains("check-btn")) {
-      const idx = e.target.dataset.index;
-      activityData[idx].completed = !activityData[idx].completed;
-      localStorage.setItem("activityData", JSON.stringify(activityData));
-      renderActivities();
+    // Check (Complete) Activity
+    if (btn.classList.contains("check-btn")) {
+      const isCompleted = activityData[idx].completed;
+      Swal.fire({
+        title: isCompleted ? "Batalkan Selesai?" : "Tandai Selesai?",
+        text: isCompleted ? "Kembalikan status ke belum selesai?" : "Apakah aktivitas ini sudah selesai?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Ya",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          activityData[idx].completed = !activityData[idx].completed;
+          localStorage.setItem("activityData", JSON.stringify(activityData));
+          renderActivities();
+          if (!isCompleted) Swal.fire("Selesai!", "Aktivitas ditandai selesai.", "success");
+        }
+      });
     }
   });
 
 
   // =========================================
-  // 3. MANAJEMEN PENGUMUMAN
+  // C. MANAJEMEN PENGUMUMAN
   // =========================================
   const announcementList = document.getElementById("announcementList");
   const announcementForm = document.getElementById("addAnnouncementForm");
@@ -282,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         
         <div class="action-btn-group">
-           <button class="action-btn check-btn" data-index="${index}" title="${item.read ? 'Tandai Belum Dibaca' : 'Tandai Sudah Dibaca'}">
+           <button class="action-btn check-btn" data-index="${index}" title="${item.read ? 'Batal Selesai' : 'Selesai'}">
              ${item.read ? '↩' : '✔'}
            </button>
            <button class="action-btn delete-item-btn delete-announcement" data-index="${index}" title="Hapus">✕</button>
@@ -297,11 +333,26 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const input = document.getElementById("announcementInput");
     if (input.value.trim() !== "") {
-      announcementData.push({ text: input.value.trim(), read: false });
-      localStorage.setItem("announcementData", JSON.stringify(announcementData));
-      renderAnnouncements();
-      input.value = "";
-      Swal.fire({ title: "Berhasil!", text: "Pengumuman ditambahkan", icon: "success", timer: 1500, showConfirmButton: false });
+      const newAnnouncement = input.value.trim();
+
+      Swal.fire({
+        title: "Tambah Pengumuman?",
+        text: "Apakah Anda yakin ingin menambahkan pengumuman ini?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Ya, Tambah",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          announcementData.push({ text: newAnnouncement, read: false });
+          localStorage.setItem("announcementData", JSON.stringify(announcementData));
+          renderAnnouncements();
+          input.value = "";
+          Swal.fire("Berhasil", "Pengumuman berhasil ditambahkan!", "success");
+        }
+      });
     }
   });
 
@@ -311,16 +362,46 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!btn) return;
     const idx = btn.dataset.index;
 
+    // Delete Announcement
     if (btn.classList.contains("delete-announcement")) {
-      announcementData.splice(idx, 1);
-      localStorage.setItem("announcementData", JSON.stringify(announcementData));
-      renderAnnouncements();
+      Swal.fire({
+        title: "Hapus pengumuman?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, hapus",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          announcementData.splice(idx, 1);
+          localStorage.setItem("announcementData", JSON.stringify(announcementData));
+          renderAnnouncements();
+          Swal.fire("Terhapus!", "Pengumuman berhasil dihapus.", "success");
+        }
+      });
     }
 
+    // Check (Read) Announcement
     if (btn.classList.contains("check-btn")) {
-      announcementData[idx].read = !announcementData[idx].read;
-      localStorage.setItem("announcementData", JSON.stringify(announcementData));
-      renderAnnouncements();
+      const isRead = announcementData[idx].read;
+      Swal.fire({
+        title: isRead ? "Tandai Belum Dibaca?" : "Tandai Sudah Dibaca?",
+        text: isRead ? "Kembalikan status ke belum dibaca?" : "Apakah Anda sudah membaca pengumuman ini?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Ya",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          announcementData[idx].read = !announcementData[idx].read;
+          localStorage.setItem("announcementData", JSON.stringify(announcementData));
+          renderAnnouncements();
+          if (!isRead) Swal.fire("Sudah Dibaca!", "Pengumuman ditandai sudah dibaca.", "success");
+        }
+      });
     }
   });
 
