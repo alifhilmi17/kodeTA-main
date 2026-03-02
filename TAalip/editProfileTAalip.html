@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIBAS - Edit Profil</title>
+
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- SweetAlert2 untuk notifikasi / Pop-up -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Custom CSS untuk edit profil (dapat digabung atau dipisah, kita buat inline untuk kemudahan demo) -->
+    <link rel="stylesheet" href="css/editProfileTAalip.css">
+</head>
+
+<body>
+
+    <div class="edit-profile-container animate__animated animate__fadeIn">
+        <!-- Header Bagian Atas -->
+        <div class="profile-header">
+            <div class="header-overlay"></div>
+            <a href="dashboardTAalip.html" class="back-btn" title="Kembali ke Dashboard">&#8592; Kembali</a>
+            <div class="profile-avatar-container">
+                <!-- Foto Profil dengan tombol edit kamera -->
+                <img src="images/Screenshot.png" alt="Foto Profil Anda" id="profileImagePreview">
+                <label for="profileImageUpload" class="camera-icon" title="Ubah Foto Profil">📷</label>
+                <input type="file" id="profileImageUpload" accept="image/*" style="display: none;">
+            </div>
+            <h2>Edit Profil Peternak</h2>
+            <p>Perbarui informasi akun dan kredensial Anda di sini</p>
+        </div>
+
+        <!-- Form Edit Profil Utama -->
+        <form id="editProfileForm" class="profile-form">
+            <div class="form-grid">
+                <!-- Kolom Kiri: Info Personal -->
+                <div class="form-section">
+                    <h3>Informasi Dasar</h3>
+                    <div class="input-group">
+                        <label for="fullName">Nama Lengkap</label>
+                        <input type="text" id="fullName" placeholder="Masukkan nama lengkap" value="Alep" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Masukkan username" value="alep_peternak" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="emailAddr">Alamat Email</label>
+                        <input type="email" id="emailAddr" placeholder="contoh@email.com" value="alep@peternakan.com"
+                            required>
+                    </div>
+                    <div class="input-group">
+                        <label for="phoneNum">Nomor Telepon</label>
+                        <input type="tel" id="phoneNum" placeholder="08xxxxxxxxxx" value="081234567890">
+                    </div>
+                </div>
+
+                <!-- Kolom Kanan: Keamanan / Password -->
+                <div class="form-section password-section">
+                    <h3>Ganti Password <span class="badge-optional">(Opsional)</span></h3>
+                    <p class="section-desc">Kosongkan bagian ini jika Anda tidak ingin merubah password.</p>
+                    <div class="input-group">
+                        <label for="currentPass">Password Saat Ini</label>
+                        <input type="password" id="currentPass" placeholder="Masukkan password saat ini">
+                    </div>
+                    <div class="input-group">
+                        <label for="newPass">Password Baru</label>
+                        <input type="password" id="newPass" placeholder="Masukkan password baru">
+                    </div>
+                    <div class="input-group">
+                        <label for="confirmPass">Konfirmasi Password Baru</label>
+                        <input type="password" id="confirmPass" placeholder="Ketik ulang password baru">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Simpan -->
+            <div class="form-actions">
+                <button type="submit" class="save-btn">Simpan Perubahan</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/editProfileTAalip.js"></script>
+</body>
+
+</html>

@@ -153,8 +153,36 @@ body {
   transform: scale(1.1);
 }
 
+.profile-name-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .profile-name {
   font-weight: 600;
+  margin: 0;
+}
+
+.edit-profile-icon {
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+  /* Lebih halus */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  /* Memberi area klik tapi tetap clean */
+}
+
+.edit-profile-icon:hover {
+  color: #fff;
+  transform: scale(1.1) rotate(5deg);
 }
 
 .logout-btn {

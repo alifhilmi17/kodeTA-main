@@ -483,12 +483,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================
 
   // 1. DUMMY DATA SETS
-  const eggProductionData = [1100, 1150, 1200, 1180, 1250, 1220, 1250]; // 7 days data
+  const eggProductionData = [1100, 1150, 1200, 1180, 1250, 1220, 1550]; // 7 days data
   const financeIncomeData = [15, 18, 14, 20]; // In Million IDR
   const financeExpenseData = [8, 10, 7, 12]; // In Million IDR
 
   // Static set for demonstration purposes
-  const totalAyam = 10000;
+  const totalAyam = 5000;
   const mortalitasData = 2; // ekor
   const sisaPakan = 250; // kg
 
