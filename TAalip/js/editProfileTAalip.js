@@ -73,3 +73,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 });
+
+/**
+ * Fungsi untuk menangani proses logout pengguna.
+ */
+function logoutUser() {
+    Swal.fire({
+        title: "Yakin ingin logout?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, logout",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "login.html";
+        }
+    });
+}
