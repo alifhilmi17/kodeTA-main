@@ -12,21 +12,31 @@
 /**
  * Fungsi untuk membuka atau menutup (toggle) submenu pada sidebar.
  * Mengubah atribut aria-hidden dan aria-expanded untuk aksesibilitas,
- * serta mengubah ikon panah penunjuk (▸/▾).
+ * serta menambah class 'active-parent' agar tombol terlihat disorot aktif.
  * @param {string} submenuId - ID elemen submenu yang akan di-toggle
  */
 function toggleSidebarMenu(submenuId) {
   const submenu = document.getElementById(submenuId);
+
+  // Jika ada class 'show', hapus agar logika CSS aria-hidden bekerja sempurna
+  if (submenu.classList.contains('show')) {
+    submenu.classList.remove('show');
+  }
+
   const isHidden = submenu.getAttribute("aria-hidden") === "true";
+  const parentButton = submenu.previousElementSibling;
 
   // Toggle visibilitas submenu
   submenu.setAttribute("aria-hidden", !isHidden);
   // Mengubah state expanded pada elemen trigger (tombol/link parent)
-  submenu.previousElementSibling.setAttribute("aria-expanded", isHidden);
+  parentButton.setAttribute("aria-expanded", isHidden);
 
-  // Toggle panah arah pada elemen trigger
-  const arrow = submenu.previousElementSibling.querySelector(".arrow");
-  arrow.textContent = isHidden ? "▾" : "▸";
+  // Tambahkan visual terang pada tombol induk bila menu terbuka
+  if (isHidden) {
+    parentButton.classList.add("active-parent");
+  } else {
+    parentButton.classList.remove("active-parent");
+  }
 }
 
 /**

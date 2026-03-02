@@ -320,3 +320,9 @@
         gap: 1rem;
     }
 }
+
+.has-submenu:hover,
+.has-submenu.active-parent {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.03);
+}

@@ -30,8 +30,9 @@
             <!-- ===== NAVIGASI UTAMA ===== -->
             <nav class="main-nav">
                 <a href="dashboardTAalip.html" title="Dashboard">🏠 Dashboard</a>
-                <button class="has-submenu" onclick="toggleSidebarMenu('ternakSubmenu')" aria-expanded="true">
-                    📊 Data Ayam <span class="arrow">▾</span>
+                <button class="has-submenu active-parent" onclick="toggleSidebarMenu('ternakSubmenu')"
+                    aria-expanded="true">
+                    📊 Data Ayam <span class="arrow">▸</span>
                 </button>
                 <div class="submenu show" id="ternakSubmenu" aria-hidden="false">
                     <a href="dataAyamTAalip.html" class="active">🐓 Data Ayam</a>
@@ -88,7 +89,10 @@
                 <div class="sidebar-profile">
                     <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic"
                         onclick="goToProfile()" />
-                    <p class="profile-name">Alep</p>
+                    <div class="profile-name-container">
+                        <p class="profile-name">Alep</p>
+                        <a href="editProfileTAalip.html" class="edit-profile-icon" title="Edit Profil">&#x270E;</a>
+                    </div>
                     <button class="logout-btn" onclick="logoutUser()">🚪 Logout</button>
                 </div>
 

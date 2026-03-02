@@ -85,7 +85,8 @@ body {
   transition: all 0.3s ease;
 }
 
-.has-submenu:hover {
+.has-submenu:hover,
+.has-submenu.active-parent {
   background: rgba(255, 255, 255, 0.3);
   transform: scale(1.03);
 }
@@ -126,7 +127,12 @@ body {
 
 /* ===== Panah (Arrow) ===== */
 .sidebar .has-submenu .arrow {
-  transition: transform 0.3s ease;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.sidebar .has-submenu[aria-expanded="true"] .arrow {
+  transform: rotate(90deg);
 }
 
 /* =========================================================

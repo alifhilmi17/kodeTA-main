@@ -37,22 +37,6 @@ let dataAyam = [
 // =========================================
 
 /**
- * Fungsi Utility untuk Toggle Menu Sidebar
- * Mengatur buka tutup submenu pada sisi sidebar navigasi.
- * @param {string} menuId - ID dari elemen submenu yang akan di toggle.
- */
-function toggleSidebarMenu(menuId) {
-    const submenu = document.getElementById(menuId);
-    // Tambah/hapus class 'show' untuk menampilkan submenu dengan CSS
-    submenu.classList.toggle('show');
-
-    // Memperbarui atribut aria-expanded untuk aksesibilitas (pembaca layar)
-    const button = submenu.previousElementSibling;
-    const isExpanded = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', !isExpanded);
-}
-
-/**
  * Format Tanggal menjadi string lokal bahasa Indonesia (misal: 10 Jan 2026).
  * @param {string} tglString - String tanggal dengan format YYYY-MM-DD
  * @returns {string} String tanggal terformat
@@ -333,4 +317,35 @@ function deleteAyam(id) {
             )
         }
     });
+}
+
+
+/**
+ * Fungsi untuk membuka atau menutup (toggle) submenu pada sidebar.
+ * Mengubah atribut aria-hidden dan aria-expanded untuk aksesibilitas,
+ * serta menambah class 'active-parent' agar tombol terlihat disorot aktif.
+ * @param {string} submenuId - ID elemen submenu yang akan di-toggle
+ */
+function toggleSidebarMenu(submenuId) {
+    const submenu = document.getElementById(submenuId);
+
+    // Jika ada class 'show', hapus saja karena kita percayakan pada aria-hidden untuk logic CSS
+    if (submenu.classList.contains('show')) {
+        submenu.classList.remove('show');
+    }
+
+    const isHidden = submenu.getAttribute("aria-hidden") === "true";
+    const parentButton = submenu.previousElementSibling;
+
+    // Toggle visibilitas submenu
+    submenu.setAttribute("aria-hidden", !isHidden);
+    // Mengubah state expanded pada elemen trigger (tombol/link parent)
+    parentButton.setAttribute("aria-expanded", isHidden);
+
+    // Tambahkan visual terang pada tombol induk bila menu terbuka
+    if (isHidden) {
+        parentButton.classList.add("active-parent");
+    } else {
+        parentButton.classList.remove("active-parent");
+    }
 }
