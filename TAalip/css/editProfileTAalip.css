@@ -53,27 +53,6 @@ body {
     transform: translateX(-3px);
 }
 
-.logout-head-btn {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    color: #fff;
-    background: rgba(230, 57, 70, 0.9);
-    border: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.logout-head-btn:hover {
-    background: #c92a34;
-    transform: scale(1.05);
-}
-
 .profile-avatar-container {
     position: relative;
     display: inline-block;
