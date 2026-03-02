@@ -316,6 +316,31 @@ body {
   background: rgba(155, 89, 182, 0.2);
 }
 
+/* =========================================================
+   📈 CHARTS SECTION
+========================================================= */
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chart-container {
+  background: #fff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
 /* ===== Grid Layout Konten ===== */
 .office-admin {
   display: grid;
@@ -903,6 +928,10 @@ body {
 }
 
 @media (max-width: 480px) {
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+
   .quick-stats {
     grid-template-columns: 1fr;
   }

@@ -119,36 +119,48 @@
         <div class="stat-icon">🥚</div>
         <div class="stat-info">
           <h4>Total Telur Hari Ini</h4>
-          <p>1,250 Butir</p>
+          <p id="stat-telur">- Butir</p>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">🐓</div>
         <div class="stat-info">
           <h4>Total Ayam Aktif</h4>
-          <p>5,000 Ekor</p>
+          <p id="stat-ayam">- Ekor</p>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">📉</div>
         <div class="stat-info">
           <h4>Mortalitas Hari Ini</h4>
-          <p>2 Ekor</p>
+          <p id="stat-mortalitas">- Ekor</p>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">🌾</div>
         <div class="stat-info">
           <h4>Stok Pakan Tersisa</h4>
-          <p>250 Kg</p>
+          <p id="stat-pakan">- Kg</p>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">💰</div>
         <div class="stat-info">
           <h4>Pendapatan Bulan Ini</h4>
-          <p>Rp 15.000.000</p>
+          <p id="stat-pendapatan">Rp -</p>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== GRAFIK / CHARTS ===== -->
+    <section class="charts-section animate__animated animate__fadeInUp">
+      <div class="chart-container">
+        <h3>📈 Tren Produksi Telur (7 Hari Terakhir)</h3>
+        <canvas id="eggProductionChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>📊 Pemasukan vs Pengeluaran</h3>
+        <canvas id="financeChart"></canvas>
       </div>
     </section>
 
@@ -211,6 +223,7 @@
   </main>
 
   <!-- ========================= JAVASCRIPT ========================== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/dashboardTAalip.js"></script>
 </body>
 

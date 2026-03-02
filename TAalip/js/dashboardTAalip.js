@@ -478,4 +478,100 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // =========================================
+  // D. GRAFIK DASHBOARD (CHART.JS) & KARTU STATISTIK
+  // =========================================
+
+  // 1. DUMMY DATA SETS
+  const eggProductionData = [1100, 1150, 1200, 1180, 1250, 1220, 1250]; // 7 days data
+  const financeIncomeData = [15, 18, 14, 20]; // In Million IDR
+  const financeExpenseData = [8, 10, 7, 12]; // In Million IDR
+
+  // Static set for demonstration purposes
+  const totalAyam = 10000;
+  const mortalitasData = 2; // ekor
+  const sisaPakan = 250; // kg
+
+  // 2. UPDATE KARTU STATISTIK CEPAT (QUICK STATS) DI ATAS
+  // Mendapatkan angka telur dari indeks data terakhir (Hari Minggu)
+  const todayEggProduction = eggProductionData[eggProductionData.length - 1];
+
+  // Mendapatkan total pemasukan dengan menjumlahkan array income (Juta Rp)
+  const totalIncomeMillion = financeIncomeData.reduce((acc, curr) => acc + curr, 0);
+
+  // Menyalurkan ke HTML (Card)
+  document.getElementById('stat-telur').textContent = `${todayEggProduction.toLocaleString('id-ID')} Butir`;
+  document.getElementById('stat-ayam').textContent = `${totalAyam.toLocaleString('id-ID')} Ekor`;
+  document.getElementById('stat-mortalitas').textContent = `${mortalitasData} Ekor`;
+  document.getElementById('stat-pakan').textContent = `${sisaPakan} Kg`;
+  document.getElementById('stat-pendapatan').textContent = `Rp ${totalIncomeMillion}.000.000`;
+
+
+  // 3. RENDER GRAFIK
+  // --- Line Chart: Tren Produksi Telur (7 Hari) ---
+  const canvasEgg = document.getElementById('eggProductionChart');
+  if (canvasEgg) {
+    const ctxEgg = canvasEgg.getContext('2d');
+    new Chart(ctxEgg, {
+      type: 'line',
+      data: {
+        labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+        datasets: [{
+          label: 'Produksi Telur (Butir)',
+          data: eggProductionData,
+          borderColor: '#fb8500',
+          backgroundColor: 'rgba(251, 133, 0, 0.2)',
+          borderWidth: 3,
+          pointBackgroundColor: '#ffb703',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: false, suggestedMin: 1000 }
+        }
+      }
+    });
+  }
+
+  // --- Bar Chart: Pemasukan vs Pengeluaran ---
+  const canvasFinance = document.getElementById('financeChart');
+  if (canvasFinance) {
+    const ctxFinance = canvasFinance.getContext('2d');
+    new Chart(ctxFinance, {
+      type: 'bar',
+      data: {
+        labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
+        datasets: [
+          {
+            label: 'Pemasukan (Juta Rp)',
+            data: financeIncomeData,
+            backgroundColor: '#2ecc71',
+            borderRadius: 5
+          },
+          {
+            label: 'Pengeluaran (Juta Rp)',
+            data: financeExpenseData,
+            backgroundColor: '#e74c3c',
+            borderRadius: 5
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+
 });
