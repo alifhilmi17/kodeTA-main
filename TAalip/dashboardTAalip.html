@@ -1,233 +1,396 @@
-<!DOCTYPE html>
-<html lang="id">
+< !DOCTYPE html >
+    <
+    html lang = "id" >
 
-<head>
-  <!-- ========================= META & TITLE ========================== -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lintau Buo Administration System</title>
+    <
+    head >
+    <
+    !-- === === === === === === === === = META & TITLE === === === === === === === === == -- >
+    <
+    meta charset = "UTF-8" / >
+    <
+    meta name = "viewport"
+content = "width=device-width, initial-scale=1.0" / >
+    <
+    title > Lintau Buo Administration System < /title>
 
-  <!-- ========================= FONTS & ANIMATIONS ========================== -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <
+    !-- === === === === === === === === = FONTS & ANIMATIONS === === === === === === === === == -- >
+    <
+    link href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+rel = "stylesheet" / >
+    <
+    link rel = "stylesheet"
+href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" / >
 
-  <!-- ========================= CUSTOM CSS ========================== -->
-  <link rel="stylesheet" href="css/dashboardTAalip.css" />
+    <
+    !-- === === === === === === === === = CUSTOM CSS === === === === === === === === == -- >
+    <
+    link rel = "stylesheet"
+href = "css/dashboardTAalip.css" / >
 
 
-  <!-- ========================= SWEETALERT2 ========================== -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
+    <
+    !-- === === === === === === === === = SWEETALERT2 === === === === === === === === == -- >
+    <
+    script src = "https://cdn.jsdelivr.net/npm/sweetalert2@11" > < /script> <
+    /head>
 
-<body>
-  <!-- ========================= SIDEBAR ========================== -->
-  <aside class="sidebar" aria-label="Sidebar Navigasi">
-    <div class="sidebar-content">
+    <
+    body >
+    <
+    !-- === === === === === === === === = SIDEBAR === === === === === === === === == -- >
+    <
+    aside class = "sidebar"
+aria - label = "Sidebar Navigasi" >
+    <
+    div class = "sidebar-content" >
 
-      <!-- ===== LOGO ===== -->
-      <h2 class="logo">🐔 LIBAS</h2>
+    <
+    !-- === == LOGO === == -- >
+    <
+    h2 class = "logo" > 🐔LIBAS < /h2>
 
-      <!-- ===== NAVIGASI UTAMA ===== -->
-      <nav class="main-nav">
-        <a href="#" class="active" title="Dashboard">🏠 Dashboard</a>
-        <button class="has-submenu" onclick="toggleSidebarMenu('ternakSubmenu')" aria-expanded="false">
-          📊 Data Ayam <span class="arrow">▸</span>
-        </button>
-        <div class="submenu" id="ternakSubmenu" aria-hidden="true">
-          <a href="dataAyamTAalip.html">🐓 Data Ayam</a>
-          <a href="#">🏠 Data Kandang</a>
-        </div>
+    <
+    !-- === == NAVIGASI UTAMA === == -- >
+    <
+    nav class = "main-nav" >
+    <
+    a href = "#"
+class = "active"
+title = "Dashboard" > 🏠Dashboard < /a> <
+    button class = "has-submenu"
+onclick = "toggleSidebarMenu('ternakSubmenu')"
+aria - expanded = "false" > 📊Data Ayam < span class = "arrow" > ▸ < /span> <
+    /button> <
+    div class = "submenu"
+id = "ternakSubmenu"
+aria - hidden = "true" >
+    <
+    a href = "dataAyamTAalip.html" > 🐓Data Ayam < /a> <
+    a href = "#" > 🏠Data Kandang < /a> <
+    /div>
 
-        <!-- ===== SUBMENU Rekomendasi Prediktif ===== -->
-        <button class="has-submenu" onclick="toggleSidebarMenu('kelolaSubmenu')" aria-expanded="false">
-          Rekomendasi Prediktif <span class="arrow">▸</span>
-        </button>
-        <div class="submenu" id="kelolaSubmenu" aria-hidden="true">
-          <a href="prediksihasiltelur.html"> Prediksi Hasil Telur</a>
+    <
+    !-- === == SUBMENU Rekomendasi Prediktif === == -- >
+    <
+    button class = "has-submenu"
+onclick = "toggleSidebarMenu('kelolaSubmenu')"
+aria - expanded = "false" >
+    Rekomendasi Prediktif < span class = "arrow" > ▸ < /span> <
+    /button> <
+    div class = "submenu"
+id = "kelolaSubmenu"
+aria - hidden = "true" >
+    <
+    a href = "prediksihasiltelur.html" > Prediksi Hasil Telur < /a>
 
-        </div>
+    <
+    /div>
 
-        <!-- ===== SUBMENU Dokumen ===== -->
-        <button class="has-submenu" onclick="toggleSidebarMenu('dokumenSubmenu')" aria-expanded="false">
-          📂 Dokumen <span class="arrow">▸</span>
-        </button>
-        <div class="submenu" id="dokumenSubmenu" aria-hidden="true">
-          <a href="#">📑 Data Keuangan</a>
-        </div>
+    <
+    !-- === == SUBMENU Dokumen === == -- >
+    <
+    button class = "has-submenu"
+onclick = "toggleSidebarMenu('dokumenSubmenu')"
+aria - expanded = "false" > 📂Dokumen < span class = "arrow" > ▸ < /span> <
+    /button> <
+    div class = "submenu"
+id = "dokumenSubmenu"
+aria - hidden = "true" >
+    <
+    a href = "#" > 📑Data Keuangan < /a> <
+    /div>
 
-        <!-- ===== SUBMENU Produksi ===== -->
-        <button class="has-submenu" onclick="toggleSidebarMenu('produksiSubmenu')" aria-expanded="false">
-          🥚 Produksi <span class="arrow">▸</span>
-        </button>
-        <div class="submenu" id="produksiSubmenu" aria-hidden="true">
-          <a href="#">📝 Input Produksi Harian</a>
-          <a href="#">📊 Laporan Produksi per Periode</a>
-        </div>
+    <
+    !-- === == SUBMENU Produksi === == -- >
+    <
+    button class = "has-submenu"
+onclick = "toggleSidebarMenu('produksiSubmenu')"
+aria - expanded = "false" > 🥚Produksi < span class = "arrow" > ▸ < /span> <
+    /button> <
+    div class = "submenu"
+id = "produksiSubmenu"
+aria - hidden = "true" >
+    <
+    a href = "#" > 📝Input Produksi Harian < /a> <
+    a href = "#" > 📊Laporan Produksi per Periode < /a> <
+    /div>
 
-        <!-- ===== SUBMENU Persediaan ===== -->
-        <button class="has-submenu" onclick="toggleSidebarMenu('persediaanSubmenu')" aria-expanded="false">
-          📦 Persediaan <span class="arrow">▸</span>
-        </button>
-        <div class="submenu" id="persediaanSubmenu" aria-hidden="true">
-          <a href="#">🥬 Stok Pakan, Obat, Vitamin</a>
-          <a href="#">⏰ Restock Reminder</a>
-          <a href="#">📜 Histori Penggunaan Pakan</a>
-        </div>
+    <
+    !-- === == SUBMENU Persediaan === == -- >
+    <
+    button class = "has-submenu"
+onclick = "toggleSidebarMenu('persediaanSubmenu')"
+aria - expanded = "false" > 📦Persediaan < span class = "arrow" > ▸ < /span> <
+    /button> <
+    div class = "submenu"
+id = "persediaanSubmenu"
+aria - hidden = "true" >
+    <
+    a href = "#" > 🥬Stok Pakan, Obat, Vitamin < /a> <
+    a href = "#" > ⏰Restock Reminder < /a> <
+    a href = "#" > 📜Histori Penggunaan Pakan < /a> <
+    /div>
 
-        <!-- ===== SUBMENU Keuangan ===== -->
-        <button class="has-submenu" onclick="toggleSidebarMenu('keuanganSubmenu')" aria-expanded="false">
-          💵 Keuangan <span class="arrow">▸</span>
-        </button>
-        <div class="submenu" id="keuanganSubmenu" aria-hidden="true">
-          <a href="#">💰 Pemasukan & Pengeluaran</a>
-          <a href="#">📊 Laporan Laba/Rugi</a>
-        </div>
+    <
+    !-- === == SUBMENU Keuangan === == -- >
+    <
+    button class = "has-submenu"
+onclick = "toggleSidebarMenu('keuanganSubmenu')"
+aria - expanded = "false" > 💵Keuangan < span class = "arrow" > ▸ < /span> <
+    /button> <
+    div class = "submenu"
+id = "keuanganSubmenu"
+aria - hidden = "true" >
+    <
+    a href = "#" > 💰Pemasukan & Pengeluaran < /a> <
+    a href = "#" > 📊Laporan Laba / Rugi < /a> <
+    /div>
 
-        <a href="#">📤 Ekspor Laporan</a>
+    <
+    a href = "#" > 📤Ekspor Laporan < /a> <
+    /nav>
 
-        <!-- ===== PROFIL PENGGUNA ===== -->
-        <div class="sidebar-profile">
-          <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic" onclick="goToProfile()" />
-          <div class="profile-name-container">
-            <p class="profile-name">Alep</p>
-            <a href="editProfileTAalip.html" class="edit-profile-icon" title="Edit Profil">&#x270E;</a>
-          </div>
-          <button class="logout-btn" onclick="logoutUser()">🚪 Logout</button>
-        </div>
+    <
+    !-- === == PROFIL PENGGUNA === == -- >
+    <
+    div class = "sidebar-profile" >
+    <
+    img src = "images/Screenshot.png"
+alt = "Foto Profil Peternak"
+class = "profile-pic"
+onclick = "goToProfile()" / >
+    <
+    div class = "profile-name-container" >
+    <
+    p class = "profile-name" > Alep < /p> <
+    a href = "editProfileTAalip.html"
+class = "edit-profile-icon"
+title = "Edit Profil" > & #x270E; < /a> <
+/div> <
+button class = "logout-btn"
+onclick = "logoutUser()" > 🚪Logout < /button> <
+    /div>
 
-    </div>
-  </aside>
+    <
+    /div> <
+    /aside>
 
-  <!-- ========================= MAIN CONTENT ========================== -->
-  <main class="main-content">
+    <
+    !-- === === === === === === === === = MAIN CONTENT === === === === === === === === == -- >
+    <
+    main class = "main-content" >
 
-    <!-- Mobile Header / Hamburger Menu -->
-    <header class="mobile-header">
-      <div class="mobile-logo">🐔 LIBAS</div>
-      <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('active')"
-        aria-label="Toggle Sidebar">
-        ☰
-      </button>
-    </header>
+    <
+    !--Mobile Header / Hamburger Menu-- >
+    <
+    header class = "mobile-header" >
+    <
+    div class = "mobile-logo" > 🐔LIBAS < /div> <
+    button class = "menu-toggle"
+onclick = "document.querySelector('.sidebar').classList.toggle('active')"
+aria - label = "Toggle Sidebar" > ☰
+    <
+    /button> <
+    /header>
 
-    <!-- ===== KARTU SAMBUTAN ===== -->
-    <section class="welcome-card animate__animated animate__fadeInDown">
-      <h2>Selamat Datang di Sistem Administrasi Peternakan!</h2>
-      <p>Kelola pakan, jadwal produksi, dan keuangan dengan lebih efisien 🐣</p>
-    </section>
+    <
+    !-- === == KARTU SAMBUTAN === == -- >
+    <
+    section class = "welcome-card animate__animated animate__fadeInDown" >
+    <
+    h2 > Selamat Datang di Sistem Administrasi Peternakan! < /h2> <
+    p > Kelola pakan, jadwal produksi, dan keuangan dengan lebih efisien🐣 < /p> <
+    /section>
 
-    <!-- ===== KARTU STATISTIK CEPAT ===== -->
-    <section class="quick-stats animate__animated animate__fadeInUp">
-      <div class="stat-card">
-        <div class="stat-icon">🥚</div>
-        <div class="stat-info">
-          <h4>Total Telur Hari Ini</h4>
-          <p id="stat-telur">- Butir</p>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🐓</div>
-        <div class="stat-info">
-          <h4>Total Ayam Aktif</h4>
-          <p id="stat-ayam">- Ekor</p>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">📉</div>
-        <div class="stat-info">
-          <h4>Mortalitas Hari Ini</h4>
-          <p id="stat-mortalitas">- Ekor</p>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🌾</div>
-        <div class="stat-info">
-          <h4>Stok Pakan Tersisa</h4>
-          <p id="stat-pakan">- Kg</p>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">💰</div>
-        <div class="stat-info">
-          <h4>Pendapatan Bulan Ini</h4>
-          <p id="stat-pendapatan">Rp -</p>
-        </div>
-      </div>
-    </section>
+    <
+    !-- === == KARTU STATISTIK CEPAT === == -- >
+    <
+    section class = "quick-stats animate__animated animate__fadeInUp" >
+    <
+    div class = "stat-card" >
+    <
+    div class = "stat-icon" > 🥚 < /div> <
+    div class = "stat-info" >
+    <
+    h4 > Total Telur Hari Ini < /h4> <
+    p id = "stat-telur" > -Butir < /p> <
+    /div> <
+    /div> <
+    div class = "stat-card" >
+    <
+    div class = "stat-icon" > 🐓 < /div> <
+    div class = "stat-info" >
+    <
+    h4 > Total Ayam Aktif < /h4> <
+    p id = "stat-ayam" > -Ekor < /p> <
+    /div> <
+    /div> <
+    div class = "stat-card" >
+    <
+    div class = "stat-icon" > 📉 < /div> <
+    div class = "stat-info" >
+    <
+    h4 > Mortalitas Hari Ini < /h4> <
+    p id = "stat-mortalitas" > -Ekor < /p> <
+    /div> <
+    /div> <
+    div class = "stat-card" >
+    <
+    div class = "stat-icon" > 🌾 < /div> <
+    div class = "stat-info" >
+    <
+    h4 > Stok Pakan Tersisa < /h4> <
+    p id = "stat-pakan" > -Kg < /p> <
+    /div> <
+    /div> <
+    div class = "stat-card" >
+    <
+    div class = "stat-icon" > 💰 < /div> <
+    div class = "stat-info" >
+    <
+    h4 > Pendapatan Bulan Ini < /h4> <
+    p id = "stat-pendapatan" > Rp - < /p> <
+    /div> <
+    /div> <
+    /section>
 
-    <!-- ===== GRAFIK / CHARTS ===== -->
-    <section class="charts-section animate__animated animate__fadeInUp">
-      <div class="chart-container">
-        <h3>📈 Tren Produksi Telur (7 Hari Terakhir)</h3>
-        <canvas id="eggProductionChart"></canvas>
-      </div>
-      <div class="chart-container">
-        <h3>📊 Pemasukan vs Pengeluaran</h3>
-        <canvas id="financeChart"></canvas>
-      </div>
-    </section>
+    <
+    !-- === == GRAFIK / CHARTS === == -- >
+    <
+    section class = "charts-section animate__animated animate__fadeInUp" >
+    <
+    div class = "chart-container" >
+    <
+    h3 > 📈Tren Produksi Telur(7 Hari Terakhir) < /h3> <
+    canvas id = "eggProductionChart" > < /canvas> <
+    /div> <
+    div class = "chart-container" >
+    <
+    h3 > 📊Pemasukan vs Pengeluaran < /h3> <
+    canvas id = "financeChart" > < /canvas> <
+    /div> <
+    /section>
 
-    <!-- ===== BAGIAN UTAMA ADMIN ===== -->
-    <section class="office-admin">
+    <
+    !-- === == BAGIAN UTAMA ADMIN === == -- >
+    <
+    section class = "office-admin" >
 
-      <!-- ===== AKTIVITAS HARIAN ===== -->
-      <div class="manage-card animate__animated animate__fadeInUp">
-        <h3>🧺 Aktivitas Harian</h3>
-        <ul id="dailyActivityList">
-          <!-- Diisi via JavaScript -->
-        </ul>
-        <form id="addActivityForm" class="add-form" style="margin-top: 1rem;">
-          <input type="text" id="activityInput" placeholder="Tambah aktivitas..." required>
-          <button type="submit">Tambah</button>
-        </form>
-      </div>
+    <
+    !-- === == AKTIVITAS HARIAN === == -- >
+    <
+    div class = "manage-card animate__animated animate__fadeInUp" >
+    <
+    h3 > 🧺Aktivitas Harian < /h3> <
+    ul id = "dailyActivityList" >
+    <
+    !--Diisi via JavaScript-- >
+    <
+    /ul> <
+    form id = "addActivityForm"
+class = "add-form"
+style = "margin-top: 1rem;" >
+    <
+    input type = "text"
+id = "activityInput"
+placeholder = "Tambah aktivitas..."
+required >
+    <
+    button type = "submit" > Tambah < /button> <
+    /form> <
+    /div>
 
-      <!-- ===== PENGUMUMAN ===== -->
-      <div class="reminder-card animate__animated animate__fadeInUp">
-        <h3>📢 Pengumuman</h3>
-        <ul id="announcementList">
-          <!-- Diisi via JavaScript -->
-        </ul>
-        <form id="addAnnouncementForm" class="add-form" style="margin-top: 1rem;">
-          <input type="text" id="announcementInput" placeholder="Tambah pengumuman..." required>
-          <button type="submit">Tambah</button>
-        </form>
-      </div>
+    <
+    !-- === == PENGUMUMAN === == -- >
+    <
+    div class = "reminder-card animate__animated animate__fadeInUp" >
+    <
+    h3 > 📢Pengumuman < /h3> <
+    ul id = "announcementList" >
+    <
+    !--Diisi via JavaScript-- >
+    <
+    /ul> <
+    form id = "addAnnouncementForm"
+class = "add-form"
+style = "margin-top: 1rem;" >
+    <
+    input type = "text"
+id = "announcementInput"
+placeholder = "Tambah pengumuman..."
+required >
+    <
+    button type = "submit" > Tambah < /button> <
+    /form> <
+    /div>
 
-      <!-- ===== JADWAL KEGIATAN ===== -->
-      <div class="schedule-card animate__animated animate__fadeInUp">
-        <h3>📆 Jadwal Kegiatan Peternakan</h3>
-        <div class="schedule-content meeting-schedule">
-          <table id="scheduleTable">
-            <thead>
-              <tr>
-                <th>Tanggal</th>
-                <th>Waktu</th>
-                <th>Kegiatan</th>
-                <th>Tempat</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+    <
+    !-- === == JADWAL KEGIATAN === == -- >
+    <
+    div class = "schedule-card animate__animated animate__fadeInUp" >
+    <
+    h3 > 📆Jadwal Kegiatan Peternakan < /h3> <
+    div class = "schedule-content meeting-schedule" >
+    <
+    table id = "scheduleTable" >
+    <
+    thead >
+    <
+    tr >
+    <
+    th > Tanggal < /th> <
+    th > Waktu < /th> <
+    th > Kegiatan < /th> <
+    th > Tempat < /th> <
+    th > Aksi < /th> <
+    /tr> <
+    /thead> <
+    tbody > < /tbody> <
+    /table>
 
-          <!-- ===== FORM TAMBAH JADWAL ===== -->
-          <form id="addScheduleForm" class="add-form" style="margin-top: auto;">
-            <input type="text" id="tanggal" placeholder="Tanggal (cth: Senin, 20 Okt 2025)" required>
-            <input type="time" id="waktu" required>
-            <input type="text" id="agenda" placeholder="Kegiatan (cth: Panen Telur)" required>
-            <input type="text" id="ruangan" placeholder="Lokasi (cth: Kandang A)" required>
-            <button type="submit">➕ Tambah Kegiatan</button>
-          </form>
-        </div>
-      </div>
+    <
+    !-- === == FORM TAMBAH JADWAL === == -- >
+    <
+    form id = "addScheduleForm"
+class = "add-form"
+style = "margin-top: auto;" >
+    <
+    input type = "text"
+id = "tanggal"
+placeholder = "Tanggal (cth: Senin, 20 Okt 2025)"
+required >
+    <
+    input type = "time"
+id = "waktu"
+required >
+    <
+    input type = "text"
+id = "agenda"
+placeholder = "Kegiatan (cth: Panen Telur)"
+required >
+    <
+    input type = "text"
+id = "ruangan"
+placeholder = "Lokasi (cth: Kandang A)"
+required >
+    <
+    button type = "submit" > ➕Tambah Kegiatan < /button> <
+    /form> <
+    /div> <
+    /div>
 
-    </section>
-  </main>
+    <
+    /section> <
+    /main>
 
-  <!-- ========================= JAVASCRIPT ========================== -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="js/dashboardTAalip.js"></script>
-</body>
+    <
+    !-- === === === === === === === === = JAVASCRIPT === === === === === === === === == -- >
+    <
+    script src = "https://cdn.jsdelivr.net/npm/chart.js" > < /script> <
+    script src = "js/dashboardTAalip.js" > < /script> <
+    /body>
 
-</html>
+    <
+    /html>
