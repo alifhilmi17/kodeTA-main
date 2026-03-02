@@ -1,30 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lintau Buo Administration System - Professional Portal">
   <title>Welcome To LIBAS</title>
 
-  <!-- Font Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <!-- Typography: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- File CSS Eksternal -->
   <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
 
-  <!-- Background Animasi -->
-  <div class="background"></div>
+  <!-- Background Animasi Modern -->
+  <div class="background-wrapper">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+    <div class="noise-overlay"></div>
+  </div>
 
   <!-- Konten Utama -->
-<div class="hero">
-  <h1>Welcome to LIBAS</h1>
-  <p>Lintau Buo Administration System</p>
+  <main class="hero-container">
+    <div class="hero-glass">
 
-  <!-- Tombol utama -->
-  <a href="login.html" class="btn btn-login">Go to Login</a>
-  <a href="signup.html" class="btn btn-signup">Go to Signup</a>
-</div>
+      <!-- Logo Ikon Kepala Ayam -->
+      <div class="brand-icon" style="font-size: 42px; line-height: 1; user-select: none;">
+        🐔
+      </div>
+
+      <h1 class="welcome-title">Welcome to <span class="gradient-text">LIBAS</span></h1>
+      <p class="subtitle">Lintau Buo Administration System</p>
+
+      <div class="features-list">
+        <span class="badge">Professional</span>
+        <span class="badge">Efficient</span>
+        <span class="badge">...</span>
+      </div>
+
+      <div class="auth-buttons">
+        <a href="login.html" class="btn btn-primary">
+          <span>Login to Portal</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" />
+          </svg>
+        </a>
+        <a href="signup.html" class="btn btn-secondary">
+          <span>Create Account</span>
+        </a>
+      </div>
+    </div>
+  </main>
 
 </body>
+
 </html>
