@@ -3,24 +3,29 @@
 
 <head>
   <!-- ========================= META & TITLE ========================== -->
+  <!-- Pengaturan dasar halaman dan judul tab browser -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lintau Buo Administration System</title>
 
-  <!-- ========================= FONTS & ANIMATIONS ========================== -->
+  <!-- ========================= FONT & ANIMASI ========================== -->
+  <!-- Memuat font Poppins dan library Animate.css untuk efek transisi -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-  <!-- ========================= CUSTOM CSS ========================== -->
+  <!-- ========================= CSS KUSTOM ========================== -->
+  <!-- Memuat gaya desain spesifik untuk halaman dashboard ini -->
   <link rel="stylesheet" href="css/dashboardTAalip.css" />
 
 
-  <!-- ========================= SWEETALERT2 ========================== -->
+  <!-- ========================= LIBRARY ========================== -->
+  <!-- Memuat library SweetAlert2 untuk menampilkan popup notifikasi interaktif -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
   <!-- ========================= SIDEBAR ========================== -->
+  <!-- Panel menu navigasi di sisi kiri layar untuk berpindah antar halaman -->
   <aside class="sidebar" aria-label="Sidebar Navigasi">
     <div class="sidebar-content">
 
@@ -35,7 +40,7 @@
         </button>
         <div class="submenu" id="ternakSubmenu" aria-hidden="true">
           <a href="dataAyamTAalip.html">🐓 Data Ayam</a>
-          <a href="#">🏠 Data Kandang</a>
+          <!-- <a href="#">🏠 Data Kandang</a> -->
         </div>
 
         <!-- ===== SUBMENU Rekomendasi Prediktif ===== -->
@@ -99,10 +104,11 @@
     </div>
   </aside>
 
-  <!-- ========================= MAIN CONTENT ========================== -->
+  <!-- ========================= KONTEN UTAMA ========================== -->
+  <!-- Area kerja utama di sisi kanan layar untuk menampilkan widget dan data -->
   <main class="main-content">
 
-    <!-- Mobile Header / Hamburger Menu -->
+    <!-- ===== HEADER MOBILE / HAMBURGER MENU ===== -->
     <header class="mobile-header">
       <div class="mobile-logo">🐔 LIBAS</div>
       <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('active')"
@@ -156,7 +162,7 @@
       </div>
     </section>
 
-    <!-- ===== GRAFIK / CHARTS ===== -->
+    <!-- ===== BAGIAN GRAFIK ===== -->
     <section class="charts-section animate__animated animate__fadeInUp">
       <div class="chart-container">
         <h3>📈 Tren Produksi Telur (7 Hari Terakhir)</h3>
@@ -226,7 +232,8 @@
     </section>
   </main>
 
-  <!-- ========================= JAVASCRIPT ========================== -->
+  <!-- ========================= SCRIPT UTAMA ========================== -->
+  <!-- Memuat library Chart.js dan interaktivitas JavaScript khusus dashboard -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/dashboardTAalip.js"></script>
 </body>

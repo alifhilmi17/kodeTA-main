@@ -90,8 +90,92 @@ function logoutUser() {
 // =========================================
 
 // Variabel Global untuk menyimpan state / objek grafik Chart.js 
-// sehingga jika ada update, chart sebelumnya bisa dihapus (.destroy) dulu
 let predictionChart = null;
+let totalHistoryDays = 7; // Default jumlah hari riwayat
+
+// Inisialisasi awal render input begitu halaman dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    renderHistoricalInputs();
+});
+
+function changeHistoryCount(delta) {
+    let inputEl = document.getElementById('jumlahHariHistoris');
+    let current = parseInt(inputEl.value);
+    if (isNaN(current)) current = 1;
+    let newVal = current + delta;
+    if (newVal < 1) newVal = 1;
+    inputEl.value = newVal;
+    totalHistoryDays = newVal;
+    renderHistoricalInputs();
+}
+
+function manualChangeHistoryCount() {
+    let inputEl = document.getElementById('jumlahHariHistoris');
+    let current = parseInt(inputEl.value);
+    if (isNaN(current) || current < 1) current = 1;
+    inputEl.value = current;
+    totalHistoryDays = current;
+    renderHistoricalInputs();
+}
+
+function renderHistoricalInputs() {
+    const prodContainer = document.getElementById('containerHistProd');
+    const profitContainer = document.getElementById('containerHistProf');
+    if (!prodContainer || !profitContainer) return;
+
+    let periodeMA = parseInt(document.getElementById('periodeMA').value) || 5;
+
+    // Simpan data sebelumnya supaya tidak hilang
+    let oldProd = {};
+    let oldProfit = {};
+    for (let i = 0; i <= totalHistoryDays + 10; i++) {
+        let pInp = document.getElementById(`hist${i}`);
+        if (pInp !== null) oldProd[i] = pInp.value;
+        let prInp = document.getElementById(`prof${i}`);
+        if (prInp !== null) oldProfit[i] = prInp.value;
+    }
+
+    prodContainer.innerHTML = '';
+    profitContainer.innerHTML = '';
+
+    for (let i = totalHistoryDays - 1; i >= 0; i--) {
+        let labelText = '';
+        if (i === 0) {
+            labelText = 'Hari Ini (Wajib)';
+        } else if (i < periodeMA && totalHistoryDays >= periodeMA) {
+            labelText = `H-${i} (Wajib)`;
+        } else if (totalHistoryDays < periodeMA) {
+            labelText = `H-${i} (Wajib ${totalHistoryDays}/${periodeMA})`;
+        } else {
+            labelText = `H-${i} (Opsi)`;
+        }
+
+        // Cek req
+        let isToday = (i === 0);
+
+        let labelStyleProd = isToday ? 'font-weight: 700; color: #d35400; background: #ffeaa7; padding: 3px 10px; border-radius: 6px; border-left: 3px solid #e67e22; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: inline-block; margin-bottom: 8px;' : '';
+        let inputStyleProd = isToday ? 'border: 2px solid #f39c12; background: #fffcf2; font-size: 1.1rem; padding: 12px; box-shadow: inset 0 0 10px rgba(243, 156, 18, 0.1), 0 0 12px rgba(243, 156, 18, 0.15);' : '';
+
+        let labelStyleProfit = isToday ? 'font-weight: 700; color: #218c46; background: #e8f8f0; padding: 3px 10px; border-radius: 6px; border-left: 3px solid #2ecc71; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: inline-block; margin-bottom: 8px;' : '';
+        let inputStyleProfit = isToday ? 'border: 2px solid #27ae60; background: #f2fbf6; font-size: 1.1rem; padding: 12px; box-shadow: inset 0 0 10px rgba(46, 204, 113, 0.1), 0 0 12px rgba(46, 204, 113, 0.15);' : '';
+
+        let colSpanStyle = isToday ? 'style="grid-column: span 2;"' : '';
+
+        prodContainer.innerHTML += `
+            <div class="form-group-mini" ${colSpanStyle}>
+                <label style="${labelStyleProd}">${labelText}</label>
+                <input type="number" id="hist${i}" class="hist-input" placeholder="-" step="any" min="0" style="${inputStyleProd}" value="${oldProd[i] || ''}">
+            </div>
+        `;
+
+        profitContainer.innerHTML += `
+            <div class="form-group-mini" ${colSpanStyle}>
+                <label style="${labelStyleProfit}">${labelText}</label>
+                <input type="number" id="prof${i}" class="hist-input" placeholder="-" step="any" style="${inputStyleProfit}" value="${oldProfit[i] || ''}">
+            </div>
+        `;
+    }
+}
 
 /**
  * Fungsi Utama `calculatePrediction`!
@@ -109,58 +193,50 @@ function calculatePrediction(event) {
     const hargaPakan = parseInt(document.getElementById('hargaPakan').value); // Rp per kg
     const hargaTelur = parseInt(document.getElementById('hargaTelur').value); // Rp per kg
 
-    // --- STEP 2A: Mengumpulkan Data Input Historis Produksi ---
-    // Menyusun dom elemen dalam sebuah list array (H-6 berada di index atas)
-    const historyDataButir = [];
-    const inputs = [
-        document.getElementById('hist6'), // index 0 (H-6)
-        document.getElementById('hist5'), // index 1 (H-5)
-        document.getElementById('hist4'), // index 2 (H-4)
-        document.getElementById('hist3'), // index 3 (H-3)
-        document.getElementById('hist2'), // index 4 (H-2)
-        document.getElementById('hist1'), // index 5 (H-1)
-        document.getElementById('hist0')  // index 6 (Hari Ini)
-    ];
-
-    // --- STEP 2B: Mengumpulkan Data Input Historis Finansial (Rp) ---
-    // Blok khusus untuk isian riwayat Keuntungan Nyata (Aktual) Manualnya.
-    const inputsProfit = [
-        document.getElementById('prof6'), // index 0
-        document.getElementById('prof5'), // index 1
-        document.getElementById('prof4'), // index 2
-        document.getElementById('prof3'), // index 3
-        document.getElementById('prof2'), // index 4
-        document.getElementById('prof1'), // index 5
-        document.getElementById('prof0')  // index 6
-    ];
+    // --- STEP 2A & 2B: Mengumpulkan Data Input Historis secara Dinamis ---
+    const inputs = [];
+    const inputsProfit = [];
+    for (let i = totalHistoryDays - 1; i >= 0; i--) {
+        inputs.push(document.getElementById(`hist${i}`));
+        inputsProfit.push(document.getElementById(`prof${i}`));
+    }
 
     // --- STEP 3: Proses Validasi (Pengecekan Keamanan) Form ---
-    // Jika user pilih MA="5" Hari, artinya WAJIB H-4 sampai Hari Ini (total 5 baris) wajib tidak boleh kosong (NaN)!
-    let startIndex = 7 - periodeMA; // Kalkulasi titik baca wajib form
+    if (totalHistoryDays < periodeMA) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Kurang Data Historis',
+            text: `Anda memilih Periode MA = ${periodeMA} Hari, sehingga Anda harus menginput data historis setidaknya selama ${periodeMA} hari! (Saat ini Anda hanya memiliki ${totalHistoryDays} hari data)`,
+            confirmButtonColor: '#3085d6'
+        });
+        return;
+    }
+
+    // Memastikan N-data terakhir sesuai periode MA tidak boleh kosong
+    let startIndex = totalHistoryDays - periodeMA;
     let isDataValid = true;
-    for (let i = startIndex; i < 7; i++) {
-        let val = parseInt(inputs[i].value); // Ambil angka telur Butir
+    for (let i = startIndex; i < totalHistoryDays; i++) {
+        let val = parseFloat(inputs[i].value);
         if (isNaN(val)) {
-            // Jika ada baris yang kosong atau keliru isinya
             isDataValid = false;
             break;
         }
     }
 
-    // Jika blok produksi ada yang bolong, teriak error Swal dan matikan proses baca (return)!
+    // Jika blok produksi ada yang bolong
     if (!isDataValid) {
         Swal.fire({
             icon: 'error',
             title: 'Data Tidak Lengkap',
-            text: `Mohon isi semua data jumlah historis (Butir) dari H-${periodeMA - 1} sampai Hari Ini sesuai periode MA yang Anda pilih (${periodeMA} Hari)!`,
+            text: `Mohon isi semua data jumlah historis (Butir) sedari H-${periodeMA - 1} hingga Hari Ini!`,
             confirmButtonColor: '#3085d6'
         });
-        return; // Hentikan eksekusi function ini disini
+        return;
     }
 
-    // Lakukan validasi hal yang serupa bagi form Nilai Pemasukan Historis (Rp) profit.
-    for (let i = startIndex; i < 7; i++) {
-        let val = parseInt(inputsProfit[i].value);
+    // Lakukan validasi produksi keuntungan historis
+    for (let i = startIndex; i < totalHistoryDays; i++) {
+        let val = parseFloat(inputsProfit[i].value);
         if (isNaN(val)) {
             Swal.fire({
                 icon: 'error',
@@ -173,19 +249,17 @@ function calculatePrediction(event) {
     }
 
     // --- STEP 4: Ekstraksi Data yang Sudah Diverifikasi ---
-    // Kita baca kembali, lalu simpan dalam array baru sebagai cadangan memori array bersih yang tidak memuat kekosongan.
+    // Simpan semua input (dari paling atas hingga Hari Ini) yang ada isinya menjadi array.
     let fullHistoryButir = [];
     let startActual = 0;
-    // Lompati indeks input jika memang sengaja tidak diisi petani (bagian atas/opsi lama)
-    while (startActual < 7 && isNaN(parseInt(inputs[startActual].value))) {
+    while (startActual < totalHistoryDays && isNaN(parseFloat(inputs[startActual].value))) {
         startActual++;
     }
 
     let fullHistoryProfit = [];
-    for (let i = startActual; i < 7; i++) {
-        // Didorong/disisipkan ke ujung array (push)
-        fullHistoryButir.push(parseInt(inputs[i].value));
-        fullHistoryProfit.push(parseInt(inputsProfit[i].value));
+    for (let i = startActual; i < totalHistoryDays; i++) {
+        fullHistoryButir.push(parseFloat(inputs[i].value));
+        fullHistoryProfit.push(parseFloat(inputsProfit[i].value));
     }
 
     // KONVERSI EMAS MA (Butir -> Kilogram)
@@ -231,12 +305,16 @@ function calculatePrediction(event) {
         highlightCard.querySelector('h4').textContent = "Proyeksi Kerugian";
         highlightCard.querySelector('p').classList.add('highlight-text-red');
         highlightCard.querySelector('p').classList.remove('highlight-text-green');
+        highlightCard.classList.remove('bg-keuntungan');
+        highlightCard.classList.add('bg-biaya');
     } else { // Untung!
         statIcon.classList.remove('red-bg', 'blue-bg');
         statIcon.classList.add('green-bg');
         highlightCard.querySelector('h4').textContent = "Proyeksi Keuntungan";
         highlightCard.querySelector('p').classList.add('highlight-text-green');
         highlightCard.querySelector('p').classList.remove('highlight-text-red');
+        highlightCard.classList.remove('bg-biaya');
+        highlightCard.classList.add('bg-keuntungan');
     }
 
     // --- STEP 8: PREDIKSI MASA DEPAN (MERAMAL 7 HARI KEDEPAN SEKALIGUS) ---

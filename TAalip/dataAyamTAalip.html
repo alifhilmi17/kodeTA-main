@@ -3,24 +3,29 @@
 
 <head>
     <!-- ========================= META & TITLE ========================== -->
+    <!-- Konfigurasi dasar dokumen dan penamaan judul tab spesifik halaman -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manajemen Data Ayam - LIBAS</title>
 
-    <!-- ========================= FONTS & ANIMATIONS ========================== -->
+    <!-- ========================= FONT & ANIMASI ========================== -->
+    <!-- Menggunakan jenis huruf eksternal Poppins dan komponen animasi pergerakan -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-    <!-- ========================= CUSTOM CSS ========================== -->
+    <!-- ========================= CSS KUSTOM ========================== -->
+    <!-- Mewarisi kerangka layout dashboard serta gaya spesifik untuk tabel data ayam -->
     <link rel="stylesheet" href="css/dashboardTAalip.css" />
     <link rel="stylesheet" href="css/dataAyamTAalip.css" />
 
-    <!-- ========================= SWEETALERT2 ========================== -->
+    <!-- ========================= LIBRARY ========================== -->
+    <!-- Mengimpor notifikasi dialog peringatan yang interaktif (SweetAlert2) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <!-- ========================= SIDEBAR ========================== -->
+    <!-- Struktur panel utama sebelah kiri untuk memandu pengguna navigasi -->
     <aside class="sidebar" aria-label="Sidebar Navigasi">
         <div class="sidebar-content">
 
@@ -36,7 +41,7 @@
                 </button>
                 <div class="submenu show" id="ternakSubmenu" aria-hidden="false">
                     <a href="dataAyamTAalip.html" class="active">🐓 Data Ayam</a>
-                    <a href="#">🏠 Data Kandang</a>
+                    <!-- <a href="#">🏠 Data Kandang</a> -->
                 </div>
 
                 <!-- ===== SUBMENU Rekomendasi Prediktif ===== -->
@@ -100,7 +105,8 @@
         </div>
     </aside>
 
-    <!-- ========================= MAIN CONTENT ========================== -->
+    <!-- ========================= KONTEN UTAMA ========================== -->
+    <!-- Berfokus pada antarmuka statistik dan tabel daftar data ayam -->
     <main class="main-content">
 
         <!-- ===== HEADER MANAJEMEN AYAM ===== -->
@@ -175,6 +181,7 @@
     </main>
 
     <!-- ========================= MODAL TAMBAH/EDIT DATA ========================== -->
+    <!-- Formulir pop-up/overlay mengambang untuk mengolah data input ternak ayam -->
     <div id="ayamModal" class="modal">
         <div class="modal-content animate__animated animate__zoomIn">
             <div class="modal-header">
@@ -237,7 +244,8 @@
         </div>
     </div>
 
-    <!-- ========================= JAVASCRIPT ========================== -->
+    <!-- ========================= SCRIPT UTAMA ========================== -->
+    <!-- File logika penggerak tabel interaktif, fungsi cari, dan kalkulasi total populasi ayam -->
     <script src="js/dataAyamTAalip.js"></script>
 </body>
 
