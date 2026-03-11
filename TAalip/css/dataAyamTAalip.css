@@ -2,107 +2,191 @@
    📊 AESTHETIC & PREMIUM STYLES FOR DATA AYAM PAGE
 ========================================================= */
 
-/* ===== Header Page ===== */
+/* ===== 0. KARTU SAMBUTAN HALAMAN (WELCOME HEADER) ===== */
 .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
-    padding: 1.5rem 2rem;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    margin-bottom: 2rem;
-    border-left: 6px solid #ff7e5f;
+    background: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
+    padding: 30px 40px;
+    border-radius: 20px;
+    margin-bottom: 35px;
+    box-shadow: 0 10px 25px rgba(234, 88, 12, 0.25);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
+    cursor: default;
+}
+
+.page-header:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(234, 88, 12, 0.4);
+}
+
+.page-header::after {
+    content: '🐓';
+    position: absolute;
+    right: 220px;
+    top: -20px;
+    font-size: 140px;
+    opacity: 0.15;
+    transform: rotate(15deg);
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s ease;
+    pointer-events: none;
+}
+
+.page-header:hover::after {
+    transform: rotate(-5deg) scale(1.15) translateY(-5px);
+    opacity: 0.3;
+}
+
+.header-text {
+    position: relative;
+    z-index: 1;
 }
 
 .header-text h2 {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 0.3rem;
+    font-size: 1.85rem;
+    font-weight: 800;
+    margin: 0 0 8px 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    color: white;
+    letter-spacing: 0.5px;
 }
 
 .header-text p {
-    color: #666;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
+    opacity: 0.9;
+    margin: 0;
+    font-weight: 500;
+    color: white;
 }
 
 /* ===== Buttons ===== */
 .btn-primary {
-    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
     border: none;
-    padding: 0.8rem 1.5rem;
+    padding: 12px 24px;
     border-radius: 50px;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(56, 239, 125, 0.3);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(56, 239, 125, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
 }
 
-.btn-secondary {
-    background: #f1f3f5;
-    color: #495057;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1rem;
+/* Khusus Tombol "Tambah Batch" di dalam Header Orange */
+.page-header .btn-primary {
+    background: white;
+    color: #ea580c;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.page-header .btn-primary:hover {
+    background: #fffaf0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    color: #c2410c;
+}
+
+/* Edit and Delete Buttons di Tabel */
+.btn-edit,
+.btn-delete {
+    padding: 8px 14px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-    background: #e2e6ea;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    margin-right: 5px;
 }
 
 .btn-edit {
-    background: #f1c40f;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    margin-right: 5px;
-    font-weight: 500;
-    transition: 0.3s;
+    background: #fef08a;
+    color: #a16207;
+    border: 1px solid #fde047;
 }
 
 .btn-edit:hover {
-    background: #d4ac0d;
+    background: #eab308;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(234, 179, 8, 0.3);
 }
 
 .btn-delete {
-    background: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: 0.3s;
+    background: #fee2e2;
+    color: #ef4444;
+    border: 1px solid #fecaca;
 }
 
 .btn-delete:hover {
-    background: #e63946;
+    background: #ef4444;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
 }
 
-/* ===== Shadow Card container ===== */
-.shadow-card {
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
-    padding: 1.5rem;
+/* ===== Info Statistik Ayam (Stats Cards Hover Effects) ===== */
+.ayam-stats .stat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid #f97316;
+}
+
+.ayam-stats .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.15);
+}
+
+.ayam-stats .stat-card:nth-child(1) {
+    border-left-color: #eab308;
+}
+
+.ayam-stats .stat-card:nth-child(1) .stat-icon {
+    background: rgba(234, 179, 8, 0.2);
+}
+
+.ayam-stats .stat-card:nth-child(2) {
+    border-left-color: #f97316;
+}
+
+.ayam-stats .stat-card:nth-child(2) .stat-icon {
+    background: rgba(249, 115, 22, 0.2);
+}
+
+.ayam-stats .stat-card:nth-child(3) {
+    border-left-color: #3b82f6;
+}
+
+.ayam-stats .stat-card:nth-child(3) .stat-icon {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+
+/* ===== Shadow Card container Utama Tabel ===== */
+.table-container.shadow-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    border-top: 5px solid #3b82f6;
     margin-bottom: 2rem;
 }
 
@@ -111,34 +195,41 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px dashed #f1f5f9;
     flex-wrap: wrap;
     gap: 1rem;
 }
 
 .table-header h3 {
-    font-size: 1.2rem;
-    color: #333;
+    margin: 0;
+    color: #1e293b;
+    font-size: 1.3rem;
+    font-weight: 700;
 }
 
 .table-header input {
-    padding: 0.6rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 50px;
+    padding: 10px 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
     width: 250px;
+    background: #f8fafc;
+    transition: all 0.3s;
     outline: none;
-    transition: 0.3s;
-    background: #f9f9f9;
 }
 
 .table-header input:focus {
-    border-color: #ff7e5f;
     background: #fff;
-    box-shadow: 0 0 5px rgba(255, 126, 95, 0.3);
+    border-color: #f97316;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
 }
 
 .table-responsive {
     overflow-x: auto;
+    border-radius: 12px;
 }
 
 .data-table {
@@ -147,61 +238,75 @@
     border-spacing: 0;
 }
 
-.data-table th {
-    background: #f8f9fa;
-    padding: 1rem;
-    text-align: left;
-    font-weight: 600;
-    color: #495057;
-    border-bottom: 2px solid #e9ecef;
-}
-
+.data-table th,
 .data-table td {
-    padding: 1rem;
-    border-bottom: 1px solid #f1f3f5;
-    color: #555;
+    padding: 16px 15px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+    color: #334155;
     vertical-align: middle;
 }
 
+.data-table th {
+    background: #f8fafc;
+    font-weight: 700;
+    text-align: left;
+    color: #475569;
+    position: sticky;
+    top: 0;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
 .data-table tbody tr {
-    transition: 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 .data-table tbody tr:hover {
-    background-color: #fdfdfd;
-    box-shadow: inset 4px 0 0px #ff7e5f;
+    background-color: #fffaf0;
+    /* Sentuhan orange tipis saat di-hover */
 }
 
+/* Kapsul Status/Pill Badges */
 .badge {
-    padding: 0.4rem 0.8rem;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
     display: inline-block;
+    letter-spacing: 0.3px;
+    text-align: center;
 }
 
 .badge-aktif {
-    background: rgba(46, 204, 113, 0.15);
-    color: #27ae60;
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
 }
 
 .badge-panen {
-    background: rgba(52, 152, 219, 0.15);
-    color: #2980b9;
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #93c5fd;
 }
 
 .badge-afkir {
-    background: rgba(231, 76, 60, 0.15);
-    color: #c0392b;
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
 }
 
-/* ===== Empty State ===== */
+/* ===== Empty State (Belum ada data di tabel) ===== */
 .empty-state {
     display: none;
-    /* di JavaScript nanti dikontrol */
     text-align: center;
-    padding: 3rem 1rem;
-    color: #888;
+    padding: 60px !important;
+    color: #94a3b8 !important;
+    font-style: italic;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin-top: 20px;
 }
 
 .empty-state .empty-icon {
@@ -211,7 +316,7 @@
     opacity: 0.5;
 }
 
-/* ===== Modal Styling ===== */
+/* ===== Modal Tampilan Mengambang (Styling Formulir Data Ayam) ===== */
 .modal {
     display: none;
     position: fixed;
@@ -221,7 +326,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(5px);
     align-items: center;
     justify-content: center;
 }
@@ -231,98 +336,124 @@
 }
 
 .modal-content {
-    background-color: #fefefe;
-    padding: 2rem;
+    background-color: #ffffff;
+    padding: 30px;
     border-radius: 20px;
     width: 100%;
     max-width: 500px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     position: relative;
+    border-top: 5px solid #f97316;
 }
 
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 1rem;
+    margin-bottom: 25px;
+    border-bottom: 2px dashed #f1f5f9;
+    padding-bottom: 15px;
 }
 
 .modal-header h3 {
+    margin: 0;
     font-size: 1.3rem;
-    color: #333;
+    color: #1e293b;
+    font-weight: 700;
 }
 
 .close-btn {
     background: transparent;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
-    color: #999;
+    color: #94a3b8;
     transition: 0.3s;
+    line-height: 1;
 }
 
 .close-btn:hover {
-    color: #ff6b6b;
+    color: #ef4444;
+    transform: rotate(90deg);
 }
 
 .form-group {
-    margin-bottom: 1.2rem;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: #444;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #475569;
     font-size: 0.95rem;
 }
 
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 0.7rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
     font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif;
     outline: none;
-    transition: 0.3s;
-    background: #fafafa;
+    transition: all 0.3s;
+    background: #f8fafc;
+    color: #334155;
 }
 
 .form-group input:focus,
 .form-group select:focus {
-    border-color: #38ef7d;
+    border-color: #f97316;
     background: #fff;
-    box-shadow: 0 0 0 3px rgba(56, 239, 125, 0.15);
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
+    transform: translateY(-2px);
 }
 
 .hint-text {
     font-size: 0.8rem;
-    color: #888;
-    margin-top: 0.3rem;
+    color: #64748b;
+    margin-top: 5px;
     display: block;
+    font-style: italic;
 }
 
 .modal-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 2rem;
+    gap: 15px;
+    margin-top: 30px;
 }
 
-/* Responsiveness */
+.modal-actions .btn-secondary {
+    background-color: #f1f5f9;
+    color: #64748b;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.modal-actions .btn-secondary:hover {
+    background-color: #e2e8f0;
+    color: #334155;
+    transform: translateY(-2px);
+}
+
+/* Responsiveness di Perangkat Mobile */
 @media (max-width: 768px) {
     .page-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
     }
-}
 
-.has-submenu:hover,
-.has-submenu.active-parent {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.03);
+    .page-header::after {
+        right: 10px;
+        top: 10px;
+        font-size: 100px;
+    }
 }

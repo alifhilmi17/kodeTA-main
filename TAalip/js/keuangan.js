@@ -76,13 +76,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Otomatis men-set kotak input tanggal hari ini pada form transaksi
     document.getElementById('trxDate').valueAsDate = new Date();
 
-    // Array Data Dummy Sementara (sebelum disambung tabel Database sesungguhnya)
-    financeData = [
-        { id: generateId(), date: '2026-03-01', type: 'pemasukan', desc: 'Penjualan 100 Papan Telur', amount: 3500000 },
-        { id: generateId(), date: '2026-03-02', type: 'pengeluaran', desc: 'Beli Pakan Ayam 5 Karung', amount: 1800000 },
-        { id: generateId(), date: '2026-03-05', type: 'pengeluaran', desc: 'Obat & Vitamin', amount: 450000 },
-        { id: generateId(), date: '2026-03-08', type: 'pemasukan', desc: 'Penjualan Kotoran Ayam (Pupuk)', amount: 200000 }
-    ];
+    // Coba mengambil history data nyata dari memori LocalStorage
+    const storedData = localStorage.getItem("financeData");
+
+    if (storedData) {
+        // Apabila sudah ada data tersimpan di memori browser, gunakan data tersebut
+        financeData = JSON.parse(storedData);
+    } else {
+        // Apabila masih kosong alias pengguna baru, tambahkan data pemula / sampel
+        financeData = [
+            { id: generateId(), date: '2026-03-01', type: 'pemasukan', desc: 'Penjualan 100 Papan Telur', amount: 3500000 },
+            { id: generateId(), date: '2026-03-02', type: 'pengeluaran', desc: 'Beli Pakan Ayam 5 Karung', amount: 1800000 },
+            { id: generateId(), date: '2026-03-05', type: 'pengeluaran', desc: 'Obat & Vitamin', amount: 450000 },
+            { id: generateId(), date: '2026-03-08', type: 'pemasukan', desc: 'Penjualan Kotoran Ayam (Pupuk)', amount: 200000 }
+        ];
+
+        // Simpan data pemula tadi secara otomatis ke browser pengguna
+        localStorage.setItem("financeData", JSON.stringify(financeData));
+    }
 
     // Menggambar data kosong/awal ke HTML saat laman diakses
     renderTable();
@@ -126,6 +137,9 @@ function addTransaction(event) {
     financeData.push(newTrx);
     financeData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // Simpan permanen data transaksi terbaru ke dalam LocalStorage milik pengguna
+    localStorage.setItem("financeData", JSON.stringify(financeData));
+
     // Menghapus data sisa ketikan di formulir agar langsung kosong
     document.getElementById('financeForm').reset();
     document.getElementById('trxDate').valueAsDate = new Date(); // Balikkan ke kalender hari ini
@@ -160,6 +174,10 @@ function deleteTransaction(id) {
         if (result.isConfirmed) {
             // Saring dan potong array dari riwayat utuh apabila id nya cocok untuk dimusnahkan
             financeData = financeData.filter(item => item.id !== id);
+
+            // Perbarui penyimpanan LocalStorage untuk merepresentasikan array yang baru dikurangi
+            localStorage.setItem("financeData", JSON.stringify(financeData));
+
             renderTable();
             Swal.fire(
                 'Terhapus!',
