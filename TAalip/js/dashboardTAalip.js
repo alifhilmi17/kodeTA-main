@@ -528,10 +528,39 @@ document.addEventListener("DOMContentLoaded", () => {
     // D. GRAFIK DASHBOARD (CHART.JS) & KARTU STATISTIK
     // =========================================
 
-    // 1. DUMMY DATA SETS
+    // 1. DATA SET TELUR (DUMMY)
     const eggProductionData = [1100, 1150, 1200, 1180, 1250, 1220, 1550]; // 7 days data
-    const financeIncomeData = [15, 18, 14, 20]; // In Million IDR
-    const financeExpenseData = [8, 10, 7, 12]; // In Million IDR
+
+    // --- INTEGRASI DATA KEUANGAN DARI LOCALSTORAGE ---
+    let financeIncomeData = [0, 0, 0, 0];
+    let financeExpenseData = [0, 0, 0, 0];
+    let totalPendapatanBulanIni = 0;
+
+    // Menarik database kecil dari localStorage yang disimpan oleh halaman keuangan.html
+    const storedFinance = JSON.parse(localStorage.getItem('financeData')) || [];
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth(); // 0-11
+    const currentYear = currentDate.getFullYear();
+
+    storedFinance.forEach(item => {
+        const trxDate = new Date(item.date);
+
+        // Memeriksa apakah transaksi berada di bulan dan tahun saat ini
+        if (trxDate.getMonth() === currentMonth && trxDate.getFullYear() === currentYear) {
+            const day = trxDate.getDate();
+
+            // Konversi tanggal (1 s.d 31) menjadi kategori index minggu (0 s.d 3)
+            let weekIndex = Math.floor((day - 1) / 7);
+            if (weekIndex > 3) weekIndex = 3; // Menyatukan tanggal 22 sampai akhir bulan ke kelompok "Minggu 4"
+
+            if (item.type === 'pemasukan') {
+                financeIncomeData[weekIndex] += item.amount;
+                totalPendapatanBulanIni += item.amount; // Tambah ke kartu rekap pendapatan stat atas
+            } else if (item.type === 'pengeluaran') {
+                financeExpenseData[weekIndex] += item.amount;
+            }
+        }
+    });
 
     // Static set for demonstration purposes
     const totalAyam = 5000;
@@ -542,15 +571,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mendapatkan angka telur dari indeks data terakhir (Hari Minggu)
     const todayEggProduction = eggProductionData[eggProductionData.length - 1];
 
-    // Mendapatkan total pemasukan dengan menjumlahkan array income (Juta Rp)
-    const totalIncomeMillion = financeIncomeData.reduce((acc, curr) => acc + curr, 0);
-
     // Menyalurkan ke HTML (Card)
     document.getElementById('stat-telur').textContent = `${todayEggProduction.toLocaleString('id-ID')} Butir`;
     document.getElementById('stat-ayam').textContent = `${totalAyam.toLocaleString('id-ID')} Ekor`;
     document.getElementById('stat-mortalitas').textContent = `${mortalitasData} Ekor`;
     document.getElementById('stat-pakan').textContent = `${sisaPakan} Kg`;
-    document.getElementById('stat-pendapatan').textContent = `Rp ${totalIncomeMillion}.000.000`;
+    // Memperbarui stat "Pendapatan Bulan Ini" bedasarkan perhitungan data Pemasukan Dinamis
+    document.getElementById('stat-pendapatan').textContent = `Rp ${totalPendapatanBulanIni.toLocaleString('id-ID')}`;
 
 
     // 3. RENDER GRAFIK
@@ -599,14 +626,14 @@ document.addEventListener("DOMContentLoaded", () => {
             data: {
                 labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
                 datasets: [{
-                    label: 'Pemasukan (Juta Rp)',
+                    label: 'Pemasukan (Rp)',
                     data: financeIncomeData,
-                    backgroundColor: '#2ecc71',
+                    backgroundColor: '#10b981', // Emerald Green Dinamis
                     borderRadius: 5
                 }, {
-                    label: 'Pengeluaran (Juta Rp)',
+                    label: 'Pengeluaran (Rp)',
                     data: financeExpenseData,
-                    backgroundColor: '#e74c3c',
+                    backgroundColor: '#ef4444', // Red Dinamis
                     borderRadius: 5
                 }]
             },
@@ -615,11 +642,37 @@ document.addEventListener("DOMContentLoaded", () => {
                 plugins: {
                     legend: {
                         position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            // Formatting isi kotak hitam kecil (Tooltip) saat batang grafik di-hover agar ada awalan Rp
+                            label: function (context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += 'Rp ' + context.parsed.y.toLocaleString('id-ID');
+                                }
+                                return label;
+                            }
+                        }
                     }
                 },
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            // Formatting gaya deret angka skala sumbu Y agar disingkat
+                            callback: function (value) {
+                                if (value >= 1000000) {
+                                    return 'Rp ' + (value / 1000000) + ' Jt';
+                                } else if (value >= 1000) {
+                                    return 'Rp ' + (value / 1000) + ' Rb';
+                                }
+                                return 'Rp ' + value;
+                            }
+                        }
                     }
                 }
             }
