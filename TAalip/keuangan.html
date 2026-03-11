@@ -66,11 +66,12 @@
                     <a href="#">📜 Histori Penggunaan Pakan</a>
                 </div>
 
-                <button class="has-submenu" onclick="toggleSidebarMenu('keuanganSubmenu')" aria-expanded="false">
+                <button class="has-submenu active-parent" onclick="toggleSidebarMenu('keuanganSubmenu')"
+                    aria-expanded="true">
                     💵 Keuangan <span class="arrow">▸</span>
                 </button>
-                <div class="submenu" id="keuanganSubmenu" aria-hidden="true">
-                    <a href="#">💰 Pemasukan & Pengeluaran</a>
+                <div class="submenu show" id="keuanganSubmenu" aria-hidden="false">
+                    <a href="keuangan.html" class="active">💰 Pemasukan & Pengeluaran</a>
                     <a href="#">📊 Laporan Laba/Rugi</a>
                 </div>
 

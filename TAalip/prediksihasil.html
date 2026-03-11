@@ -35,7 +35,7 @@
 
             <!-- ===== NAVIGASI UTAMA ===== -->
             <nav class="main-nav">
-                <a href="#" class="active" title="Dashboard">🏠 Dashboard</a>
+                <a href="dashboardTAalip.html" title="Dashboard">🏠 Dashboard</a>
                 <button class="has-submenu" onclick="toggleSidebarMenu('ternakSubmenu')" aria-expanded="false">
                     📊 Data Ayam <span class="arrow">▸</span>
                 </button>
@@ -45,12 +45,12 @@
                 </div>
 
                 <!-- ===== SUBMENU Rekomendasi Prediktif ===== -->
-                <button class="has-submenu" onclick="toggleSidebarMenu('kelolaSubmenu')" aria-expanded="false">
+                <button class="has-submenu active-parent" onclick="toggleSidebarMenu('kelolaSubmenu')"
+                    aria-expanded="true">
                     Rekomendasi Prediktif <span class="arrow">▸</span>
                 </button>
-                <div class="submenu" id="kelolaSubmenu" aria-hidden="true">
-                    <a href="prediksihasil.html"> Prediksi Hasil </a>
-
+                <div class="submenu show" id="kelolaSubmenu" aria-hidden="false">
+                    <a href="prediksihasil.html" class="active"> Prediksi Hasil </a>
                 </div>
 
                 <!-- ===== SUBMENU Produksi ===== -->
@@ -77,7 +77,7 @@
                     💵 Keuangan <span class="arrow">▸</span>
                 </button>
                 <div class="submenu" id="keuanganSubmenu" aria-hidden="true">
-                    <a href="#">💰 Pemasukan & Pengeluaran</a>
+                    <a href="keuangan.html">💰 Pemasukan & Pengeluaran</a>
                     <a href="#">📊 Laporan Laba/Rugi</a>
                 </div>
 

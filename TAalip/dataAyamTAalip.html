@@ -34,12 +34,13 @@
 
             <!-- ===== NAVIGASI UTAMA ===== -->
             <nav class="main-nav">
-                <a href="#" class="active" title="Dashboard">🏠 Dashboard</a>
-                <button class="has-submenu" onclick="toggleSidebarMenu('ternakSubmenu')" aria-expanded="false">
+                <a href="dashboardTAalip.html" title="Dashboard">🏠 Dashboard</a>
+                <button class="has-submenu active-parent" onclick="toggleSidebarMenu('ternakSubmenu')"
+                    aria-expanded="true">
                     📊 Data Ayam <span class="arrow">▸</span>
                 </button>
-                <div class="submenu" id="ternakSubmenu" aria-hidden="true">
-                    <a href="dataAyamTAalip.html">🐓 Data Ayam</a>
+                <div class="submenu show" id="ternakSubmenu" aria-hidden="false">
+                    <a href="dataAyamTAalip.html" class="active">🐓 Data Ayam</a>
                     <!-- <a href="#">🏠 Data Kandang</a> -->
                 </div>
 
