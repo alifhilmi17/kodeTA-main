@@ -34,13 +34,12 @@
 
             <!-- ===== NAVIGASI UTAMA ===== -->
             <nav class="main-nav">
-                <a href="dashboardTAalip.html" title="Dashboard">🏠 Dashboard</a>
-                <button class="has-submenu active-parent" onclick="toggleSidebarMenu('ternakSubmenu')"
-                    aria-expanded="true">
+                <a href="#" class="active" title="Dashboard">🏠 Dashboard</a>
+                <button class="has-submenu" onclick="toggleSidebarMenu('ternakSubmenu')" aria-expanded="false">
                     📊 Data Ayam <span class="arrow">▸</span>
                 </button>
-                <div class="submenu show" id="ternakSubmenu" aria-hidden="false">
-                    <a href="dataAyamTAalip.html" class="active">🐓 Data Ayam</a>
+                <div class="submenu" id="ternakSubmenu" aria-hidden="true">
+                    <a href="dataAyamTAalip.html">🐓 Data Ayam</a>
                     <!-- <a href="#">🏠 Data Kandang</a> -->
                 </div>
 
@@ -50,14 +49,7 @@
                 </button>
                 <div class="submenu" id="kelolaSubmenu" aria-hidden="true">
                     <a href="prediksihasil.html"> Prediksi Hasil </a>
-                </div>
 
-                <!-- ===== SUBMENU Dokumen ===== -->
-                <button class="has-submenu" onclick="toggleSidebarMenu('dokumenSubmenu')" aria-expanded="false">
-                    📂 Dokumen <span class="arrow">▸</span>
-                </button>
-                <div class="submenu" id="dokumenSubmenu" aria-hidden="true">
-                    <a href="#">📑 Data Keuangan</a>
                 </div>
 
                 <!-- ===== SUBMENU Produksi ===== -->
@@ -84,13 +76,25 @@
                     💵 Keuangan <span class="arrow">▸</span>
                 </button>
                 <div class="submenu" id="keuanganSubmenu" aria-hidden="true">
-                    <a href="#">💰 Pemasukan & Pengeluaran</a>
+                    <a href="keuangan.html">💰 Pemasukan & Pengeluaran</a>
                     <a href="#">📊 Laporan Laba/Rugi</a>
                 </div>
 
-                <a href="#">📤 Ekspor Laporan</a>
+                <!-- ===== SUBMENU Dokumen ===== -->
+                <button class="has-submenu" onclick="toggleSidebarMenu('dokumenSubmenu')" aria-expanded="false">
+                    📂 Dokumen <span class="arrow">▸</span>
+                </button>
+                <div class="submenu" id="dokumenSubmenu" aria-hidden="true">
+                    <a href="#">🥚 Dokumen Produksi</a>
+                    <a href="#">📦 Dokumen Persediaan</a>
+                    <a href="#">💵 Dokumen Keuangan</a>
+                    <a href="#">📊 Laporan Laba/Rugi</a>
+                    <a href="#">📤 Ekspor Laporan</a>
+                </div>
+
             </nav>
 
+            </nav>
             <!-- ===== PROFIL PENGGUNA ===== -->
             <div class="sidebar-profile">
                 <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic"

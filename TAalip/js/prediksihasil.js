@@ -349,6 +349,38 @@ function calculatePrediction(event) {
     // Dipecah dan ditransfer menjadi parameter argumen fungsi lain dibawah sana.
     updateChart(fullHistoryKg, historyKeuntunganAct, proyeksi7HariKg, proyeksi7HariKeuntungan);
 
+    // --- STEP 10: MEMPERBARUI TABEL HASIL REKAPAN PREDIKSI ---
+    let tableBody = document.getElementById('rekapanTableBody');
+    if (tableBody) {
+        tableBody.innerHTML = '';
+        for (let i = 0; i < 7; i++) {
+            let pKg = proyeksi7HariKg[i];
+            let butir = Math.round(pKg * 16);
+            let profit = proyeksi7HariKeuntungan[i];
+            let rpFormat = Math.round(profit).toLocaleString('id-ID');
+            let profitStyle = profit < 0 ? "color: #e74c3c; font-weight: 700;" : "color: #27ae60; font-weight: 700;";
+
+            let tr = document.createElement('tr');
+            tr.style.borderBottom = "1px solid #f1f2f6";
+
+            // Hover effect can be simple or done without events by using inline and simple colors
+            // Since it's inline, we stay clean.
+            tr.innerHTML = `
+                <td style="padding: 16px; color: #2c3e50; font-weight: 700; border-right: 1px solid rgba(0,0,0,0.05); text-align: center; background: rgba(255,255,255,0.4);">
+                    <span style="background: #34495e; color: white; padding: 4px 10px; border-radius: 6px;">H+${i + 1}</span>
+                </td>
+                <td style="padding: 16px; color: #2c3e50; border-right: 1px solid rgba(0,0,0,0.05);">
+                    <span style="font-weight: 700; color: #2980b9; font-size: 1.05rem;">${pKg.toFixed(2)} Kg</span> 
+                    <span style="font-size: 0.85rem; color: #7f8c8d; margin-left: 6px; font-weight: 500;">(~${butir.toLocaleString('id-ID')} Butir)</span>
+                </td>
+                <td style="padding: 16px; ${profitStyle} font-size: 1.05rem;">
+                    Rp ${rpFormat}
+                </td>
+            `;
+            tableBody.appendChild(tr);
+        }
+    }
+
     // Kirim notifikasi manis perihal hasil Laba Hari Esok (Satu hari di depan).
     Swal.fire({
         icon: 'success',

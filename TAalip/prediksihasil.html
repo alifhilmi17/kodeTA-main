@@ -35,9 +35,7 @@
 
             <!-- ===== NAVIGASI UTAMA ===== -->
             <nav class="main-nav">
-                <a href="dashboardTAalip.html" title="Dashboard">🏠 Dashboard</a>
-
-                <!-- ===== SUBMENU Data Ayam ===== -->
+                <a href="#" class="active" title="Dashboard">🏠 Dashboard</a>
                 <button class="has-submenu" onclick="toggleSidebarMenu('ternakSubmenu')" aria-expanded="false">
                     📊 Data Ayam <span class="arrow">▸</span>
                 </button>
@@ -52,14 +50,7 @@
                 </button>
                 <div class="submenu" id="kelolaSubmenu" aria-hidden="true">
                     <a href="prediksihasil.html"> Prediksi Hasil </a>
-                </div>
 
-                <!-- ===== SUBMENU Dokumen ===== -->
-                <button class="has-submenu" onclick="toggleSidebarMenu('dokumenSubmenu')" aria-expanded="false">
-                    📂 Dokumen <span class="arrow">▸</span>
-                </button>
-                <div class="submenu" id="dokumenSubmenu" aria-hidden="true">
-                    <a href="#">📑 Data Keuangan</a>
                 </div>
 
                 <!-- ===== SUBMENU Produksi ===== -->
@@ -90,8 +81,20 @@
                     <a href="#">📊 Laporan Laba/Rugi</a>
                 </div>
 
-                <!-- ===== LINK Ekspor Laporan ===== -->
-                <a href="#">📤 Ekspor Laporan</a>
+                <!-- ===== SUBMENU Dokumen ===== -->
+                <button class="has-submenu" onclick="toggleSidebarMenu('dokumenSubmenu')" aria-expanded="false">
+                    📂 Dokumen <span class="arrow">▸</span>
+                </button>
+                <div class="submenu" id="dokumenSubmenu" aria-hidden="true">
+                    <a href="#">🥚 Dokumen Produksi</a>
+                    <a href="#">📦 Dokumen Persediaan</a>
+                    <a href="#">💵 Dokumen Keuangan</a>
+                    <a href="#">📊 Laporan Laba/Rugi</a>
+                    <a href="#">📤 Ekspor Laporan</a>
+                </div>
+
+            </nav>
+
             </nav>
 
             <!-- ===== PROFIL PENGGUNA ===== -->
@@ -406,11 +409,52 @@
                 </div>
 
                 <!-- 2. Kontainer Grafik Prediksi -->
-                <div class="chart-container shadow-card">
-                    <h3>📊 Grafik Produksi Aktual vs Rekomendasi MA</h3>
+                <div class="chart-container shadow-card"
+                    style="background: linear-gradient(to bottom right, #ffffff, #fdfbfb); border: 2px solid #e1e8ed; padding: 25px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
+                    <h3
+                        style="font-size: 1.25rem; color: #2c3e50; font-weight: 700; border-bottom: 3px solid #f39c12; padding-bottom: 12px; margin-bottom: 25px; display: inline-block;">
+                        📊 Grafik Produksi Aktual vs Rekomendasi MA
+                    </h3>
                     <!-- Pembungkus Canvas Grafik -->
                     <div class="canvas-wrapper">
                         <canvas id="profitChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 3. Kontainer Hasil Rekapan Prediksi -->
+                <div class="summary-container shadow-card"
+                    style="margin-top: 30px; background: linear-gradient(135deg, #ffffff 0%, #f0f8fb 100%); border: 2px solid #bce0fd; padding: 25px; border-radius: 16px; box-shadow: 0 8px 25px rgba(52, 152, 219, 0.1);">
+                    <h3
+                        style="margin-bottom: 20px; font-size: 1.25rem; color: #1e3c72; border-bottom: 3px solid #3498db; padding-bottom: 12px; display: flex; align-items: center; gap: 8px; font-weight: 700;">
+                        <span
+                            style="background: #3498db; color: white; padding: 4px 8px; border-radius: 8px; font-size: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">📋</span>
+                        Hasil Rekapan Prediksi (7 Hari Kedepan)
+                    </h3>
+                    <div class="table-responsive"
+                        style="overflow-x: auto; background: white; border-radius: 12px; border: 1px solid #d2dce6; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
+                        <table class="summary-table" id="summaryTable"
+                            style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+                            <thead>
+                                <tr style="background: linear-gradient(90deg, #34495e, #2c3e50); color: white;">
+                                    <th
+                                        style="padding: 15px; font-weight: 600; border-top-left-radius: 10px; width: 15%; text-align: center;">
+                                        Hari ke-</th>
+                                    <th style="padding: 15px; font-weight: 600; width: 45%;">Prediksi Produksi
+                                    </th>
+                                    <th
+                                        style="padding: 15px; font-weight: 600; border-top-right-radius: 10px; width: 40%;">
+                                        Proyeksi Laba Bersih</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rekapanTableBody">
+                                <tr>
+                                    <td colspan="3"
+                                        style="text-align: center; padding: 40px; color: #7f8c8d; font-style: italic; background-color: #fcfcfc;">
+                                        ✨ Lakukan analisis prediksi terlebih dahulu untuk melihat hasil rekapan disini.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
