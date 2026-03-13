@@ -1,14 +1,19 @@
 /* =========================================================
-   SISTEM ADMINISTRASI PETERNAKAN
+   SISTEM ADMINISTRASI PETERNAKAN (SISTEM PAKAR MA)
    File: prediksihasil.js
-   Deskripsi: Mengandung logika eksekusi matematika untuk
-   halaman rekomendasi prediktif "Moving Average". Menangani
-   dom update panel statistik hasil dan pembuatan Chart grafik.
+   ---------------------------------------------------------
+   Deskripsi singkat:
+   File inti ini mendemonstrasikan Fitur Unggulan TA, yaitu 
+   Sistem Peramalan (Forecasting) dengan Algoritma 'Moving Average'.
+   Aplikasi memproses input data produksi masa lalu menjadi 
+   kalkulasi matematika dinamis untuk meramal tren masa depan,
+   lalu menampilkannya menggunakan grafik ganda (Dual-Axis Chart).
 ========================================================= */
 
 // =========================================
-// 1. FUNGSI SIDEBAR & NAVIGASI UMUM 
-//    (Halaman ini tetap dapat memiliki akses menu)
+// 1. FUNGSI NAVIGASI UMUM & PERALIHAN TAB
+// Penjelasan: Fungsi estetik dan pergerakan DOM Element Sidebar 
+// serta penggantian sub-menu Form Input (Tombol Toggle Tab).
 // =========================================
 
 /**
@@ -86,7 +91,10 @@ function logoutUser() {
 }
 
 // =========================================
-// 2. LOGIKA UTAMA PREDIKSI MOVING AVERAGE (MA)
+// 2. KONTROLER ALGORITMA MOVING AVERAGE (MA CORE)
+// Penjelasan: Blok skrip penting pemroses utama (Brain Logic).
+// Menangani validasi matriks nilai H-Hari, melakukan rekursi 
+// perhitungan rata-rata, lalu mendesain output laporan (Dom Update).
 // =========================================
 
 // Variabel Global untuk menyimpan state / objek grafik Chart.js 
@@ -179,7 +187,7 @@ function renderHistoricalInputs() {
 
 /**
  * Fungsi Utama `calculatePrediction`!
- * Berjalan seketika petani menekan tombol "Analisis dengan MA".
+ * Berjalan ketika menekan tombol "Analisis dengan MA".
  * @param {Event} event - Dioper dari eksekusi form 'onsubmit', diproteksi dengan .preventDefault() agar laman web tidak reload patah-patah.
  */
 function calculatePrediction(event) {

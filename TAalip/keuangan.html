@@ -2,39 +2,36 @@
 <html lang="id">
 
 <head>
-    <!-- ========================= META & TITLE ========================== -->
-    <!-- Pengaturan karakter encoding dan ukuran layar responsif untuk perangkat mobile -->
+    <!-- Pengaturan metadata dasar dan viewport untuk responsivitas -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manajemen Data Keuangan - LIBAS</title>
 
-    <!-- ========================= FONT & ANIMASI ========================== -->
-    <!-- Menggunakan font Poppins dari Google dan library Animate.css untuk efek animasi -->
+    <!-- Mengimpor font eksternal (Poppins) dan animasi (Animate.css) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-    <!-- ========================= STYLESHEET CSS ========================== -->
-    <!-- Mengimpor file gaya CSS untuk layout dashboard dasar dan gaya khusus halaman keuangan ini -->
+    <!-- File CSS untuk layout tampilan utama dan desain halaman keuangan -->
     <link rel="stylesheet" href="css/dashboardTAalip.css" />
     <link rel="stylesheet" href="css/keuangan.css" />
 
-    <!-- ========================= LIBRARY JAVASCRIPT ========================== -->
-    <!-- Memuat SweetAlert2 untuk menampilkan notifikasi pop-up yang interaktif dan menarik -->
+    <!-- Mengimpor library SweetAlert2 untuk menampilkan pop-up notifikasi yang menarik -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <!-- ========================= SIDEBAR NAVIGASI ========================== -->
-    <!-- Area menu utama di sisi kiri layar untuk navigasi antar halaman -->
+    <!-- SIDEBAR NAVIGASI: Menu utama di sebelah kiri layar -->
     <aside class="sidebar" aria-label="Sidebar Navigasi">
         <div class="sidebar-content">
-            <!-- ===== LOGO APLIKASI ===== -->
+            <!-- Logo Aplikasi -->
             <h2 class="logo">🐔 LIBAS</h2>
 
-            <!-- ===== DAFTAR MENU UTAMA ===== -->
-            <!-- Daftar tautan submenu drop-down yang mengatur navigasi modul web -->
+            <!-- Daftar Menu Navigasi -->
             <nav class="main-nav">
+                <!-- Tautan Menu Dashboard Utama -->
                 <a href="dashboardTAalip.html" title="Dashboard">🏠 Dashboard</a>
+                
+                <!-- Menu Dropdown: Data Ayam -->
                 <button class="has-submenu" onclick="toggleSidebarMenu('ternakSubmenu')" aria-expanded="false">
                     📊 Data Ayam <span class="arrow">▸</span>
                 </button>
@@ -42,6 +39,7 @@
                     <a href="dataAyamTAalip.html">🐓 Data Ayam</a>
                 </div>
 
+                <!-- Menu Dropdown: Rekomendasi Prediktif -->
                 <button class="has-submenu" onclick="toggleSidebarMenu('kelolaSubmenu')" aria-expanded="false">
                     Rekomendasi Prediktif <span class="arrow">▸</span>
                 </button>
@@ -49,6 +47,7 @@
                     <a href="prediksihasil.html"> Prediksi Hasil </a>
                 </div>
 
+                <!-- Menu Dropdown: Produksi -->
                 <button class="has-submenu" onclick="toggleSidebarMenu('produksiSubmenu')" aria-expanded="false">
                     🥚 Produksi <span class="arrow">▸</span>
                 </button>
@@ -57,6 +56,7 @@
                     <a href="#">📊 Laporan Produksi per Periode</a>
                 </div>
 
+                <!-- Menu Dropdown: Persediaan -->
                 <button class="has-submenu" onclick="toggleSidebarMenu('persediaanSubmenu')" aria-expanded="false">
                     📦 Persediaan <span class="arrow">▸</span>
                 </button>
@@ -66,8 +66,8 @@
                     <a href="#">📜 Histori Penggunaan Pakan</a>
                 </div>
 
-                <button class="has-submenu active-parent" onclick="toggleSidebarMenu('keuanganSubmenu')"
-                    aria-expanded="true">
+                <!-- Menu Dropdown: Keuangan (Sedang Aktif) -->
+                <button class="has-submenu active-parent" onclick="toggleSidebarMenu('keuanganSubmenu')" aria-expanded="true">
                     💵 Keuangan <span class="arrow">▸</span>
                 </button>
                 <div class="submenu show" id="keuanganSubmenu" aria-hidden="false">
@@ -75,7 +75,7 @@
                     <a href="#">📊 Laporan Laba/Rugi</a>
                 </div>
 
-                <!-- ===== SUBMENU Dokumen ===== -->
+                <!-- Menu Dropdown: Dokumen Rekap Laporan -->
                 <button class="has-submenu" onclick="toggleSidebarMenu('dokumenSubmenu')" aria-expanded="false">
                     📂 Dokumen <span class="arrow">▸</span>
                 </button>
@@ -88,35 +88,33 @@
                 </div>
             </nav>
 
-            <!-- ===== PROFIL PENGGUNA ===== -->
-            <!-- Area tombol logout dan info user di bagian bawah sidebar -->
+            <!-- PROFIL PENGGUNA: Bagian bawah sidebar yang menampilkan foto, nama, dan tombol logout -->
             <div class="sidebar-profile">
-                <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic"
-                    onclick="goToProfile()" />
+                <!-- Foto profil -->
+                <img src="images/Screenshot.png" alt="Foto Profil Peternak" class="profile-pic" onclick="goToProfile()" />
                 <div class="profile-name-container">
+                    <!-- Nama profil dan edit -->
                     <p class="profile-name">Alep</p>
                     <a href="editProfileTAalip.html" class="edit-profile-icon" title="Edit Profil">&#x270E;</a>
                 </div>
+                <!-- Tombol keluar dari akun -->
                 <button class="logout-btn" onclick="logoutUser()">🚪 Logout</button>
             </div>
         </div>
     </aside>
 
-    <!-- ========================= KONTEN UTAMA ========================== -->
-    <!-- Ruang kerja utama di sebelah kanan sidebar yang menampilkan isian form dan angka ringkasan -->
+    <!-- KONTEN UTAMA: Area utama di sebelah kanan untuk form dan rincian data -->
     <main class="main-content">
-        <!-- ===== HEADER MOBILE / HAMBURGER MENU ===== -->
-        <!-- Tombol menu sidebar yang hanya muncul pada layar Handphone (< 768px) -->
+        <!-- Header khusus untuk tampilan Mobile (layar kecil) -->
         <header class="mobile-header">
             <div class="mobile-logo">🐔 LIBAS</div>
-            <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('active')"
-                aria-label="Toggle Sidebar">
+            <!-- Tombol hamburger untuk memunculkan sidebar -->
+            <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('active')" aria-label="Toggle Sidebar">
                 ☰
             </button>
         </header>
 
-        <!-- ===== HEADER HALAMAN KEUANGAN ===== -->
-        <!-- Judul dan deskripsi singkat dari fungsi halaman saat ini -->
+        <!-- HEADER HALAMAN: Menampilkan Judul Modul dan Deskripsi Fungsi -->
         <header class="page-header animate__animated animate__fadeInDown">
             <div class="header-text">
                 <h2>📑 Manajemen Data Keuangan</h2>
@@ -124,25 +122,25 @@
             </div>
         </header>
 
-        <!-- ===== AREA KEUANGAN: FORM INPUT & TABEL RIWAYAT ===== -->
-        <!-- Container Grid berisikan Panel Form Input (kiri) dan Data Tabel (kanan) -->
+        <!-- AREA KEUANGAN: Baris kontainer yang terbagi menjadi bagian Form (Kiri) dan Daftar Data (Kanan) -->
         <div class="finance-container animate__animated animate__fadeInUp">
 
-            <!-- ===================== PANEL KIRI: FORMULIR INPUT TRANSAKSI ===================== -->
-            <!-- Area panel untuk pengguna memasukkan data pendapatan maupun pengeluaran baru -->
+            <!-- BAGIAN KIRI: Formulir Input Transaksi Baru -->
             <section class="finance-form-card shadow-card">
                 <div class="form-header">
                     <h3>➕ Tambah Transaksi</h3>
                 </div>
-                <!-- Tag Form Utama: saat tombol simpan ditekan, Javascript function 'addTransaction' akan memprosesnya -->
+                
+                <!-- Formulir pengisian data. Memanggil fungsi js addTransaction() saat dikirim -->
                 <form id="financeForm" onsubmit="addTransaction(event)">
-                    <!-- 1. Input Kalender (Tanggal Transaksi) -->
+                    
+                    <!-- 1. Input Tanggal Transaksi -->
                     <div class="form-group">
                         <label for="trxDate">Tanggal Transaksi</label>
                         <input type="date" id="trxDate" required>
                     </div>
 
-                    <!-- 2. Pilihan Radio (Pemasukan / Pengeluaran) -->
+                    <!-- 2. Pilihan Jenis (Pemasukan atau Pengeluaran) menggunakan radio button -->
                     <div class="form-group">
                         <label>Jenis Transaksi</label>
                         <div class="radio-group">
@@ -157,19 +155,19 @@
                         </div>
                     </div>
 
-                    <!-- 3. Input Teks (Keterangan/Catatan Transaksi) -->
+                    <!-- 3. Input Keterangan atau Catatan Singkat -->
                     <div class="form-group">
                         <label for="trxDesc">Keterangan / Deskripsi</label>
                         <input type="text" id="trxDesc" placeholder="Contoh: Penjualan 50 Papan Telur" required>
                     </div>
 
-                    <!-- 4. Input Angka (Nominal Jumlah Uang dalam Rupiah) -->
+                    <!-- 4. Input Jumlah Nominal Mata Uang Rupiah -->
                     <div class="form-group">
                         <label for="trxAmount">Jumlah Uang (Rp)</label>
                         <input type="number" id="trxAmount" placeholder="Contoh: 1500000" min="1" step="any" required>
                     </div>
 
-                    <!-- 5. Tombol Aksi (Simpan ke dalam sistem atau Bersihkan layar pengisian) -->
+                    <!-- 5. Kumpulan Tombol: Simpan Data ke sistem & Kosongkan isi form saat diklik -->
                     <div class="form-actions" style="margin-top: 25px;">
                         <button type="submit" class="btn-primary">💾 Simpan Data</button>
                         <button type="reset" class="btn-secondary">Kosongkan</button>
@@ -177,27 +175,29 @@
                 </form>
             </section>
 
-            <!-- ===================== PANEL KANAN: TABEL DAN RINGKASAN DATA ===================== -->
-            <!-- Menampilkan kartu rekapitulasi nominal keuangan dan tabel daftar riwayat transaksi -->
+            <!-- BAGIAN KANAN: Menampilkan Nominal Ringkasan dan Daftar Tabel Transaksi -->
             <section class="finance-data-card shadow-card">
 
-                <!-- 1. Kartu Ringkasan (Total Pemasukan, Total Pengeluaran, Saldo Bersih) -->
+                <!-- 1. Tiga Kartu Kecil Berisi Rangkuman Angka Keseluruhan -->
                 <div class="finance-summary-cards">
+                    <!-- Kartu Total Hasil Pemasukan (Uang Masuk) -->
                     <div class="summary-box box-income">
                         <h4>Total Pemasukan</h4>
                         <p id="totalPemasukan">Rp 0</p>
                     </div>
+                    <!-- Kartu Total Hasil Pengeluaran (Uang Keluar) -->
                     <div class="summary-box box-expense">
                         <h4>Total Pengeluaran</h4>
                         <p id="totalPengeluaran">Rp 0</p>
                     </div>
+                    <!-- Kartu Sisa Saldo Bersih Bulanan / Transaksi Total -->
                     <div class="summary-box box-balance">
                         <h4>Saldo Bersih</h4>
                         <p id="totalSaldo">Rp 0</p>
                     </div>
                 </div>
 
-                <!-- 2. Header Tabel Data dan Fitur Fitur Pencarian -->
+                <!-- 2. Judul Tabel dan Kolom Pencarian Cepat (Filter) -->
                 <div class="table-header">
                     <h3>📋 Riwayat Transaksi Keuangan</h3>
                     <div class="table-actions">
@@ -205,11 +205,10 @@
                     </div>
                 </div>
 
-                <!-- 3. Tabel Data Dinamis -->
-                <!-- Data dalam tabel ini secara otomatis akan di-generate oleh Javascript saat ada input baru -->
+                <!-- 3. Tabel Daftar Seluruh Riwayat Keuangan -->
                 <div class="table-responsive">
                     <table id="financeTable" class="data-table">
-                        <!-- Judul Kolom Tabel (Header) -->
+                        <!-- Judul-Judul Kolom -->
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
@@ -219,9 +218,8 @@
                                 <th style="text-align: center;">Aksi</th>
                             </tr>
                         </thead>
-                        <!-- Isi Baris Tabel (Body) - Kosong dari awal karena diisi oleh JS -->
+                        <!-- Isi Daftar Transaksi yang akan dimunculkan oleh javascipt secara otomatis -->
                         <tbody id="financeTableBody">
-                            <!-- Data akan dimuat via JS -->
                             <tr>
                                 <td colspan="5" class="empty-state">Belum ada data transaksi.</td>
                             </tr>
@@ -234,8 +232,7 @@
 
     </main>
 
-    <!-- ========================= SCRIPT JAVASCRIPT UTAMA ========================== -->
-    <!-- Memuat file js khusus yang menangani logika hitung saldo, tambah riwayat, dan hapus tabel. -->
+    <!-- Mengimpor file JS yang berisi operasi dan sistem penyimpananan data -->
     <script src="js/keuangan.js"></script>
 </body>
 

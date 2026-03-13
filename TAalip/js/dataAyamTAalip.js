@@ -1,16 +1,21 @@
 /* =========================================================
-   🐔 SCRIPT MANAJEMEN DATA AYAM
+   🐔 KODE SUMBER: MANAJEMEN DATA AYAM (CRUD INVENTARIS)
    File: dataAyamTAalip.js
-   Deskripsi: Mengelola fitur CRUD (Create, Read, Update, Delete) 
-   untuk tabel inventaris atau populasi ayam termasuk update statistik.
+   ---------------------------------------------------------
+   Deskripsi singkat:
+   File ini mendemonstrasikan kapabilitas aplikasi dalam 
+   menyimpan, menampilkan, mengubah, dan menghapus (CRUD)
+   data Populasi Ayam secara dinamis. State management array
+   data dimuat secara sinkronus bersama LocalStorage.
 ========================================================= */
 
 // =========================================
-// 1. DEKLARASI DATA AWAL
+// 1. DEKLARASI STATE (DATA AWAL)
+// Penjelasan: Variabel global yang bertindak sebagai "Tabel Database" virtual (Array of Objects).
 // =========================================
 
 // Data Dummy Awal yang merepresentasikan struktur data batch ayam.
-// Digunakan apabila di dalam localStorage belum ada data yang tersimpan.
+// Berfungsi untuk menguji purwarupa aplikasi jika belum ada interaksi nyata sbelumnya.
 let dataAyam = [
     {
         id: "B-001",
@@ -33,7 +38,9 @@ let dataAyam = [
 ];
 
 // =========================================
-// 2. FUNGSI UTILITAS UMUM
+// 2. MODUL UTILITAS (FUNGSI PEMBANTU GLOBAL)
+// Penjelasan: Modul fungsional murni (pure functions) yang dapat digunakan 
+// berulang untuk konversi tipe data atau format tampilan antarmuka.
 // =========================================
 
 /**
@@ -47,7 +54,9 @@ function formatTanggal(tglString) {
 }
 
 // =========================================
-// 3. INISIALISASI & LOGIKA TAMPILAN UTAMA
+// 3. INISIALISASI PROGRAM & TAMPILAN (LIFECYCLE)
+// Penjelasan: Titik masuk utama berjalannya script (Siklus Hidup Awal). 
+// Proses rendering Tabel dan perhitungan Statistik di-trigger dari sini.
 // =========================================
 
 // Berjalan otomatis saat dokumen HTML selesai diload.
@@ -160,7 +169,10 @@ function searchTable() {
 }
 
 // =========================================
-// 4. MODAL POP-UP LOGIC & CRUD
+// 4. LOGIKA MODAL POP-UP DAN FUNGSI CRUD INTI
+// Penjelasan: Seluruh algoritma pengubahan data berpusat di sini,
+// dari validasi Masukan (Form Input), Generate ID Otomatis (Auto Increment-like),
+// hingga pemotongan array (Delete).
 // =========================================
 
 // Deklarasi element global untuk modal dan form

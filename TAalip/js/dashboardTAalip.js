@@ -1,12 +1,15 @@
 /* =========================================================
-   🐔 SISTEM ADMINISTRASI PETERNAKAN
+   🐔 SISTEM ADMINISTRASI PETERNAKAN (KODE JAVASCRIPT UTAMA)
    File: dashboardTAalip.js
-   Deskripsi: Mengatur interaksi sidebar, profil, logout,
-   dan manajemen tabel kegiatan peternakan.
+   ---------------------------------------------------------
+   Deskripsi singkat:
+   File ini berfungsi sebagai pengontrol antarmuka utama (Dashboard).
+   Menggunakan Vanilla JavaScript untuk memanipulasi DOM (Document Object Model)
+   dan menyimpan/membaca data secara persisten melalui LocalStorage browser.
 ========================================================= */
 
 // =========================================
-// 1. SIDEBAR & NAVIGASI
+// 1. PENGENDALI SIDEBAR & NAVIGASI
 // =========================================
 
 /**
@@ -75,14 +78,19 @@ function logoutUser() {
 
 
 /* =========================================================
-   🚀 MAIN DASHBOARD LOGIC (DOM LOADED)
-   Semua script di bawah akan dieksekusi setelah struktur HTML selesai dimuat.
+   🚀 LOGIKA DASHBOARD UTAMA (EVENT LISTENER DOM LOADED)
+   ---------------------------------------------------------
+   Deskripsi singkat:
+   Blok pembungkus event 'DOMContentLoaded' ini memastikan bahwa
+   seluruh script JavaScript di dalamnya hanya akan dieksekusi 
+   setelah semua kerangka HTML halaman selesai dimuat ke memori browser.
+   Ini adalah praktik terbaik untuk menghindari error "Element Not Found".
 ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
 
     // =========================================
-    // A. MANAJEMEN JADWAL KEGIATAN
-    // Mengelola tabel jadwal kegiatan peternakan
+    // A. MODUL MANAJEMEN JADWAL KEGIATAN (CRUD via LocalStorage)
+    // Penjelasan: Modul ini menangani pembuatan tabel dinamis jadwal bekerja.
     // =========================================
 
     // Mengambil elemen tbody dari tabel jadwal dan form tambah jadwal
@@ -196,8 +204,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =========================================
-    // B. MANAJEMEN AKTIVITAS HARIAN
-    // Mengelola daftar checklist aktivitas harian
+    // B. MODUL MANAJEMEN AKTIVITAS HARIAN (Sistem To-Do List)
+    // Penjelasan: Menggunakan array boolean untuk mencatat state 'completed'.
+    // Data disimpan dalam bentuk JSON string di LocalStorage.
     // =========================================
 
     const activityList = document.getElementById("dailyActivityList");
@@ -360,8 +369,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =========================================
-    // C. MANAJEMEN PENGUMUMAN
-    // Mengelola list pengumuman atau info penting
+    // C. MODUL MANAJEMEN PENGUMUMAN PENTING
+    // Penjelasan: Berfungsi untuk menampilkan daftar notifikasi atau pengumuman.
+    // Memiliki struktur data objek state berupa 'text' dan 'read' (sudah dibaca).
     // =========================================
 
     const announcementList = document.getElementById("announcementList");
@@ -525,10 +535,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // =========================================
-    // D. GRAFIK DASHBOARD (CHART.JS) & KARTU STATISTIK
+    // D. MODUL GRAFIK VISUALISASI DATA (MENGGUNAKAN LIBRARY CHART.JS)
+    // Penjelasan: Modul ini bertugas menggambar grafik interaktif dengan HTML5 Canvas.
+    // Mengambil data terpadu (Integrated) dari localStorage halaman Keuangan.
     // =========================================
 
-    // 1. DATA SET TELUR (DUMMY)
+    // 1. DATA SET TELUR (DUMMY DEMO)
     const eggProductionData = [1100, 1150, 1200, 1180, 1250, 1220, 1550]; // 7 days data
 
     // --- INTEGRASI DATA KEUANGAN DARI LOCALSTORAGE ---

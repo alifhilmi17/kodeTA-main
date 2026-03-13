@@ -1,11 +1,9 @@
 /* =========================================
-   STYLE CSS TATA LETAK MODUL KEUANGAN
-   File Khusus untuk halaman Data Keuangan. 
+   STYLE CSS KEUANGAN
+   Tujuan: Memberikan tampilan yang rapi untuk halaman Keuangan.
 ========================================= */
 
-/* =========================================
-   0. KARTU SAMBUTAN HALAMAN (WELCOME HEADER)
-========================================= */
+/* 1. Header (Bagian atas halaman sambutan) */
 .page-header {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     padding: 30px 40px;
@@ -24,6 +22,7 @@
     box-shadow: 0 16px 35px rgba(16, 185, 129, 0.4);
 }
 
+/* Dekorasi latar berikon di bagian header */
 .page-header::after {
     content: '💳';
     position: absolute;
@@ -60,6 +59,7 @@
     z-index: 1;
 }
 
+/* 2. Pengaturan Layout Dasar Grid Kotak (Kiri Form, Kanan Ringkasan) */
 .finance-container {
     display: grid;
     grid-template-columns: 1fr 2.2fr;
@@ -67,12 +67,14 @@
     margin-bottom: 40px;
 }
 
+/* Layout menyesuaikan ukuran layar mobile (tumpuk ke bawah) */
 @media (max-width: 992px) {
     .finance-container {
         grid-template-columns: 1fr;
     }
 }
 
+/* Gaya Kartu Utama (Background Putih bershadow) */
 .shadow-card {
     background: #ffffff;
     border-radius: 20px;
@@ -82,14 +84,17 @@
     position: relative;
 }
 
+/* Garis atas hijau penanda Form Input Kiri */
 .finance-form-card {
     border-top: 5px solid #10b981;
 }
 
+/* Garis atas biru penanda Tabel Data Kanan */
 .finance-data-card {
     border-top: 5px solid #3b82f6;
 }
 
+/* Judul dan Garis bawah section (Form Header / Table Header) */
 .form-header,
 .table-header {
     margin-bottom: 25px;
@@ -108,9 +113,7 @@
     font-weight: 700;
 }
 
-/* =========================================
-   1. GAYA INPUT DAN FORMULIR TRANSAKSI KIRI
-========================================= */
+/* 3. Gaya Input Formulir Kiri */
 .form-group {
     margin-bottom: 20px;
 }
@@ -123,6 +126,7 @@
     font-size: 0.95rem;
 }
 
+/* Gaya Kolom Text Box, Date, & Angka */
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group input[type="date"] {
@@ -137,6 +141,7 @@
     color: #334155;
 }
 
+/* Transisi dan Efek klik saat mengetik pada input box */
 .form-group input:focus {
     border-color: #3b82f6;
     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
@@ -145,7 +150,7 @@
     transform: translateY(-2px);
 }
 
-/* Desain Khusus Tombol Pilihan (Radio Buttons) Pemasukan/Pengeluaran */
+/* Gaya Khusus Kotak Radio Button (Pemasukan/Pengeluaran) */
 .radio-group {
     display: flex;
     gap: 15px;
@@ -176,13 +181,14 @@
     cursor: pointer;
 }
 
-/* Desain Tombol Aksi Simpan dan Reset Formulir */
+/* Gaya Tombol Aksi (Simpan & Bersihkan) */
 .form-actions {
     display: flex;
     gap: 15px;
     margin-top: 30px;
 }
 
+/* Struktur standar setiap tombol di form */
 .btn-primary,
 .btn-secondary {
     padding: 14px 20px;
@@ -199,6 +205,7 @@
     align-items: center;
 }
 
+/* Tombol Menyimpan Berwarna Hijau */
 .btn-primary {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
@@ -210,6 +217,7 @@
     box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
 }
 
+/* Tombol Membersihkan Form Bewarna Abu-Abu Terang */
 .btn-secondary {
     background-color: #f1f5f9;
     color: #64748b;
@@ -221,9 +229,7 @@
     transform: translateY(-2px);
 }
 
-/* =========================================
-   2. GAYA KARTU PENCATATAN RINGKASAN SALDO
-========================================= */
+/* 4. Gaya 3 Kartu Ringkasan (Dompet) di Atas Tabel Kanan */
 .finance-summary-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -245,6 +251,7 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* Efek lingkaran abstrak bayangan di pojok kartu ringkasan */
 .summary-box::after {
     content: '';
     position: absolute;
@@ -275,48 +282,32 @@
     z-index: 1;
 }
 
+/* Warna-Warna Kartu Saldo (Hijau Pemasukan, Merah Pengeluaran, Biru Saldo Saat Ini) */
 .box-income {
     background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
     border: 1px solid #86efac;
 }
 
-.box-income h4 {
-    color: #166534;
-}
-
-.box-income p {
-    color: #15803d;
-}
+.box-income h4 { color: #166534; }
+.box-income p { color: #15803d; }
 
 .box-expense {
     background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
     border: 1px solid #fca5a5;
 }
 
-.box-expense h4 {
-    color: #991b1b;
-}
-
-.box-expense p {
-    color: #b91c1c;
-}
+.box-expense h4 { color: #991b1b; }
+.box-expense p { color: #b91c1c; }
 
 .box-balance {
     background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
     border: 1px solid #93c5fd;
 }
 
-.box-balance h4 {
-    color: #1e40af;
-}
+.box-balance h4 { color: #1e40af; }
+.box-balance p { color: #1d4ed8; }
 
-.box-balance p {
-    color: #1d4ed8;
-}
-
-/* =========================================
-   3. GAYA TABEL RIWAYAT TRANSAKSI KANAN
-========================================= */
+/* 5. Kolom Interaksi & Tabel Riwayat Pencatatan */
 .table-actions input {
     padding: 10px 18px;
     border: 1px solid #cbd5e1;
@@ -366,6 +357,7 @@
     letter-spacing: 0.5px;
 }
 
+/* Transisi Halus pada baris tabel */
 .data-table tbody tr {
     transition: background-color 0.2s ease;
 }
@@ -374,6 +366,7 @@
     background-color: #f1f5f9;
 }
 
+/* Teks dan Penempatan Saat Tabel Kosong */
 .empty-state {
     text-align: center;
     padding: 60px !important;
@@ -383,7 +376,7 @@
     border-radius: 12px;
 }
 
-/* Pill (Bentuk Kapsul) Label Penanda Pemasukan/Pengeluaran Hijau Merah */
+/* 6. Label Kapsul (Badge) dan Tombol Aksi */
 .badge-type {
     padding: 6px 14px;
     border-radius: 30px;
@@ -405,7 +398,32 @@
     border: 1px solid #fecaca;
 }
 
-/* Desain Interaktif Tombol Tong Sampah (Delete) Tabel */
+/* Tombol Edit Warna Biru Muda */
+.btn-edit {
+    background: #e0f2fe;
+    color: #0ea5e9;
+    border: 1px solid #bae6fd;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 5px;
+}
+
+.btn-edit:hover {
+    background: #0ea5e9;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+}
+
+/* Tombol Hapus / Batal Warna Merah Kemerahan */
 .btn-delete {
     background: #fee2e2;
     color: #ef4444;

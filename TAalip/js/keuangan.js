@@ -1,12 +1,19 @@
 /* =========================================================
-   SISTEM ADMINISTRASI PETERNAKAN
+   SISTEM ADMINISTRASI PETERNAKAN (BUKU BESAR KEUANGAN)
    File: keuangan.js
-   Deskripsi: Menangani logika Pembuatan, Pembacaan, dan 
-   Penghapusan (CRUD) untuk modul Buku Data Keuangan.
+   ---------------------------------------------------------
+   Deskripsi singkat:
+   File ini mengatur Modul Buku Kas (Pemasukan & Pengeluaran).
+   Algoritma Create, Read, Update, Delete (CRUD) secara penuh 
+   berjalan di sisi frontend, tanpa Backend/Database nyata, 
+   melainkan menggunakan Web Storage API (LocalStorage).
+   Data ini sangat krusial karena ikut terintegrasi bersama
+   grafik Chart.js pada Dashboard Utama.
 ========================================================= */
 
 // =========================================
-// 1. FUNGSI NAVIGASI UMUM & SIDEBAR 
+// 1. FUNGSI NAVIGASI UMUM & ANTARMUKA SIDEBAR 
+// Penjelasan: Memastikan navigasi menu tetap berfungsi independen di tiap halaman.
 // =========================================
 
 /**
@@ -63,7 +70,9 @@ function logoutUser() {
 }
 
 // =========================================
-// 2. LOGIKA INTI DATA KEUANGAN (CRUD)
+// 2. KONTROLER MODUL KEUANGAN INTI (CRUD OPERATIONS)
+// Penjelasan: Berisi serangkaian fungsi manipulasi array transaksi 
+// secara langsung sesuai alur data.
 // =========================================
 
 // Variabel Penampung Utama untuk merekam daftar riwayat
@@ -124,7 +133,7 @@ function addTransaction(event) {
         return;
     }
 
-    // Pembuatan Objék Array Transaksi Baru
+    // Pembuatan Objek Array Transaksi Baru
     const newTrx = {
         id: generateId(),
         date: date,
@@ -161,7 +170,7 @@ function addTransaction(event) {
 // OPERASI "DELETE" (Hapus Transaksi)
 // =========================================
 function deleteTransaction(id) {
-    // Memunculkan kotak peringatan bahaya sebelum benar-benar dihapus tuntas
+    // Memunculkan kotak peringatan sebelum benar-benar dihapus
     Swal.fire({
         title: 'Hapus Data?',
         text: "Anda tidak bisa mengembalikan data yang sudah dihapus!",
@@ -184,6 +193,106 @@ function deleteTransaction(id) {
                 'Data transaksi telah dihapus.',
                 'success'
             );
+        }
+    });
+}
+
+// =========================================
+// OPERASI "UPDATE" (Edit Transaksi)
+// =========================================
+function editTransaction(id) {
+    const item = financeData.find(d => d.id === id);
+    if (!item) return;
+
+    Swal.fire({
+        title: 'Edit Transaksi',
+        html: `
+            <div style="text-align: left; padding: 0 10px;">
+                <label style="display:block; margin-bottom:5px; font-weight: 600; font-family: 'Poppins', sans-serif; font-size: 0.95rem; color: #475569;">Tanggal Transaksi</label>
+                <input type="date" id="swal-date" class="swal2-input" value="${item.date}" style="width: 100%; max-width: 100%; margin-bottom: 20px; border-radius: 12px; font-family: 'Poppins', sans-serif;">
+                
+                <label style="display:block; margin-bottom:5px; font-weight: 600; font-family: 'Poppins', sans-serif; font-size: 0.95rem; color: #475569;">Jenis Transaksi</label>
+                <div style="margin-bottom: 20px; font-family: 'Poppins', sans-serif; display: flex; gap: 15px;">
+                    <label style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; padding: 10px 15px; background: #f1f5f9; border-radius: 12px; font-weight: 600; color: #475569;">
+                        <input type="radio" name="swal-type" value="pemasukan" style="accent-color: #3b82f6; width: 18px; height: 18px; cursor: pointer;" ${item.type === 'pemasukan' ? 'checked' : ''}> Pemasukan
+                    </label>
+                    <label style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; padding: 10px 15px; background: #f1f5f9; border-radius: 12px; font-weight: 600; color: #475569;">
+                        <input type="radio" name="swal-type" value="pengeluaran" style="accent-color: #3b82f6; width: 18px; height: 18px; cursor: pointer;" ${item.type === 'pengeluaran' ? 'checked' : ''}> Pengeluaran
+                    </label>
+                </div>
+                
+                <label style="display:block; margin-bottom:5px; font-weight: 600; font-family: 'Poppins', sans-serif; font-size: 0.95rem; color: #475569;">Keterangan / Deskripsi</label>
+                <input type="text" id="swal-desc" class="swal2-input" value="${item.desc}" style="width: 100%; max-width: 100%; margin-bottom: 20px; border-radius: 12px; font-family: 'Poppins', sans-serif;">
+                
+                <label style="display:block; margin-bottom:5px; font-weight: 600; font-family: 'Poppins', sans-serif; font-size: 0.95rem; color: #475569;">Jumlah Uang (Rp)</label>
+                <input type="number" id="swal-amount" class="swal2-input" value="${item.amount}" style="width: 100%; max-width: 100%; margin-bottom: 10px; border-radius: 12px; font-family: 'Poppins', sans-serif;">
+            </div>
+        `,
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonText: '💾 Simpan Perubahan',
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#10b981',
+        cancelButtonColor: '#64748b',
+        customClass: {
+            confirmButton: 'btn-primary',
+            cancelButton: 'btn-secondary',
+            popup: 'shadow-card'
+        },
+
+        preConfirm: () => {
+            const date = document.getElementById('swal-date').value;
+            const type = document.querySelector('input[name="swal-type"]:checked')?.value;
+            const desc = document.getElementById('swal-desc').value;
+            const amount = parseFloat(document.getElementById('swal-amount').value);
+
+            if (!date || !type || !desc || isNaN(amount) || amount <= 0) {
+                Swal.showValidationMessage('Mohon isi semua data dengan benar');
+                return false;
+            }
+
+            return { date, type, desc, amount };
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Simpan Perubahan?',
+                text: "Apakah Anda yakin data yang diubah sudah benar?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#10b981',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'Ya, Simpan!',
+                cancelButtonText: 'Batal'
+            }).then((confirmResult) => {
+                if (confirmResult.isConfirmed) {
+                    const index = financeData.findIndex(d => d.id === id);
+                    if (index !== -1) {
+                        // Update item dengan hasil dari input form popup sebelumnya (dilambangkan dr 'result.value')
+                        financeData[index].date = result.value.date;
+                        financeData[index].type = result.value.type;
+                        financeData[index].desc = result.value.desc;
+                        financeData[index].amount = result.value.amount;
+
+                        // Urutkan ulang riwayat menurut tanggal terbaru
+                        financeData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                        // Simpan permanen ke memori LocalStorage
+                        localStorage.setItem("financeData", JSON.stringify(financeData));
+
+                        // Regenerasi ulang tabel dengan data termodifikasi terbaru
+                        renderTable();
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Data transaksi telah diperbarui.',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                }
+            });
         }
     });
 }
@@ -248,6 +357,7 @@ function renderTable(filterKeyword = '') {
                 <td style="font-weight: 500;">${item.desc}</td>
                 <td style="text-align: right; color: ${amountColor}; font-weight: 600;">Rp ${amountStr}</td>
                 <td style="text-align: center;">
+                    <button class="btn-edit" onclick="editTransaction('${item.id}')" title="Edit Data">✏️ Edit</button>
                     <button class="btn-delete" onclick="deleteTransaction('${item.id}')" title="Hapus Data">🗑️ Hapus</button>
                 </td>
             `;
